@@ -11,6 +11,8 @@ import Home from '../containers/Home';
 import About from '../containers/About';
 import WorkExperience from '../containers/WorkExperience'
 import Education from '../containers/Education';
+import Projects from '../containers/Projects';
+import Skills from '../containers/Skills';
 
 const IndexPage = () => (
 	<div>
@@ -26,11 +28,12 @@ const IndexPage = () => (
 		<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}}>
 			<Education />
 		</Section>
-		<DividedSection
-			leftSection={"howdy"}
-			rightSection={"how are you"}
-			leftColors={ColorPairs.lightGrey}
-			rightColors={ColorPairs.teal}/>
+		<Section colors={ColorPairs.grey}>
+			<Projects />
+		</Section>
+		<Section>
+			<Skills />
+		</Section>
 	</div>
   
 )
