@@ -16,10 +16,10 @@ const SectionDiv = styled.div`
 
 export default class Section extends Component {
 	render() {
-		const {children, style, colors} = this.props;
+		const {children, style, colors, id} = this.props;
 		return (
 			<ThemeProvider theme={colors}>
-				<SectionDiv style={style}>
+				<SectionDiv style={style} id={id}>
 					{children}
 				</SectionDiv>
 			</ThemeProvider>

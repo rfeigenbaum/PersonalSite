@@ -1,9 +1,19 @@
 import React, {Component} from 'react';
 import styled from 'styled-components'
 
+
+const Conatiner = styled.div`
+	max-width: 1200px;
+	margin: 0 auto;
+`
+
+let Text = styled.h2`
+	font-weight: 400;
+`
+
 export default () => (
-	<div>
+	<Conatiner>
 		<h1>About</h1>
-		<p>An exceptionally creative and dependable developer with a focus in web application development.</p>
-	</div>
+		<Text>An exceptionally creative and dependable developer with a focus in web application development.</Text>
+	</Conatiner>
 )

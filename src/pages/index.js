@@ -13,25 +13,26 @@ import WorkExperience from '../containers/WorkExperience'
 import Education from '../containers/Education';
 import Projects from '../containers/Projects';
 import Skills from '../containers/Skills';
+import NavHeader from '../components/NavHeader';
 
 const IndexPage = () => (
 	<div>
-		<Section colors={ColorPairs.darkGrey}>
+		<Section colors={ColorPairs.darkGrey} id="home">
 			<Home />
 		</Section>
-		<Section colors={ColorPairs.lightGrey}>
+		<Section colors={ColorPairs.lightGrey} id="about">
 			<About />
 		</Section>
-		<Section colors={ColorPairs.grey}>
+		<Section colors={ColorPairs.grey} id="experience">
 			<WorkExperience />
 		</Section>
-		<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}}>
+		<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
 			<Education />
 		</Section>
-		<Section colors={ColorPairs.grey}>
+		<Section colors={ColorPairs.grey} id="projects">
 			<Projects />
 		</Section>
-		<Section>
+		<Section colors={ColorPairs.lightGrey} id="skills">
 			<Skills />
 		</Section>
 	</div>
