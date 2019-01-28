@@ -10,9 +10,13 @@ const NavTrigger = styled.div`
 	bottom: 0;
 `
 
+const Name = styled.h2`
+	font-weight: 600;
+`
+
 export default () => (
 	<Container>
-		<h2>Ryan Feigenbaum</h2>
+		<Name>Ryan Feigenbaum</Name>
 		<h1>Developer.</h1>
 		<NavTrigger id="nav-trigger" />
 		<Nav />

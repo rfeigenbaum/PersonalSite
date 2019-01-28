@@ -37,9 +37,11 @@ const animateOut = (obj, side) => {
 	};
 	if(side === Directions.Top || side === Directions.Bottom) {
 		animation.top = side === Directions.Top ? "-100%" : "100%";
+		animation.left = "0";
 	}
 	else {
 		animation.left = side === Directions.Left ? "-100%" : "100%";
+		animation.top = "0";
 	}
 	console.log(animation)
 	return anime(animation);

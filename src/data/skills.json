@@ -54,6 +54,10 @@
 	{
 		"name": "MongoDB",
 		"rating": 2.5
+	},
+	{
+		"name": "LESS",
+		"rating": 1.5
 	}
 	
 ]

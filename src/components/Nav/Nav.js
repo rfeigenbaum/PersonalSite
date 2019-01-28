@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import * as ScrollMagic from 'scrollmagic'
+//import * as ScrollMagic from 'scrollmagic'
 import ColorPairs from '../colors'
 import NavItem from './NavItem'
+import scrollToAnchor from './ScrollToAnchor'
 //import NavHeader from './NavHeader';
 
 
@@ -34,8 +35,10 @@ const NavHeaderStyled = styled.h2`
 	z-index: 1001;
 	padding: 4px;
 	text-align: left;
-	width: 300px;
+	width: 400px;
 	margin: 0;
+	cursor: pointer;
+	font-weight: 600;
 `
 
 export default class NavBar extends Component {
@@ -43,27 +46,30 @@ export default class NavBar extends Component {
 		super();
 	}
 	componentDidMount() {
-		this.controller = new ScrollMagic.Controller({
-			loglevel: 2
-		});
-		new ScrollMagic.Scene({
-			triggerElement: "#main-nav"
-		})
-		.triggerHook("onLeave")
-		.setPin("#main-nav", {pushFollowers: false}) // pins the element for the the scene's duration
-		.addTo(this.controller); // assign the scene to the controller
+		if (typeof window !== 'undefined') {
+			this.ScrollMagic = require('scrollmagic')
+			this.controller = new this.ScrollMagic.Controller({
+				loglevel: 2
+			});
+			new this.ScrollMagic.Scene({
+				triggerElement: "#main-nav"
+			})
+			.triggerHook("onLeave")
+			.setPin("#main-nav", {pushFollowers: false}) // pins the element for the the scene's duration
+			.addTo(this.controller); // assign the scene to the controller
 
-		new ScrollMagic.Scene({
-			triggerElement: "#nav-header"
-		})
-		.triggerHook("onLeave")
-		.setPin("#nav-header", {pushFollowers: false}) // pins the element for the the scene's duration
-		.addTo(this.controller); // assign the scene to the controller
+			new this.ScrollMagic.Scene({
+				triggerElement: "#nav-header"
+			})
+			.triggerHook("onLeave")
+			.setPin("#nav-header", {pushFollowers: false}) // pins the element for the the scene's duration
+			.addTo(this.controller); // assign the scene to the controller
+		}
 	}
 	render() {
 		return (
 			<div>
-				<NavHeaderStyled id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
+				<NavHeaderStyled onClick={() => scrollToAnchor("#home")} id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
 				<Nav id="main-nav">
 					
 					<NavItems>

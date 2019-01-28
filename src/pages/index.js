@@ -13,7 +13,7 @@ import WorkExperience from '../containers/WorkExperience'
 import Education from '../containers/Education';
 import Projects from '../containers/Projects';
 import Skills from '../containers/Skills';
-import NavHeader from '../components/NavHeader';
+import Contact from '../containers/Contact';
 
 const IndexPage = () => (
 	<div>
@@ -34,6 +34,9 @@ const IndexPage = () => (
 		</Section>
 		<Section colors={ColorPairs.lightGrey} id="skills">
 			<Skills />
+		</Section>
+		<Section colors={ColorPairs.darkGrey} id="contact">
+			<Contact />
 		</Section>
 	</div>
   

@@ -9,12 +9,17 @@ const Experience = styled.div`
 const Info = styled.div`
 	border-right: solid thin ${props => props.theme.secondary};
 	text-align: right;
-	flex-basis: 400px;
+	flex-basis: 600px;
 	padding-right: 10px;
+	flex-shrink: 1;
 `
 const Details = styled.div`
 	flex-grow: 1;
+	flex-shrink: 2;
 	padding-left: 10px;
+`
+const DetailsP = styled.p`
+	font-size: 22px;
 `
 
 export default (props) => {
@@ -24,7 +29,9 @@ export default (props) => {
 				<ExperienceInfo workExperience={props.workExperience} />
 			</Info>
 			<Details>
+				<DetailsP>
 				{props.workExperience.description}
+				</DetailsP>
 			</Details>
 		</Experience>
 	)
