@@ -5,6 +5,13 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+	{
+		resolve: 'gatsby-plugin-root-import',
+		options: {
+			components: `${__dirname}/src/components`,
+			utils: `${__dirname}/src/utils`
+		}
+	},
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

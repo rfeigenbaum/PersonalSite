@@ -4,8 +4,8 @@ import anime from 'animejs';
 export default (anchor) => {
 	let offsetFromTop = $(anchor).offset().top
 
-	let distanceFromDiv = Math.abs(offsetFromTop - window.pageYOffset);
-	let duration = distanceFromDiv/3
+	//let distanceFromDiv = Math.abs(offsetFromTop - window.pageYOffset);
+	//let duration = distanceFromDiv/3
 	
 	const scrollCoords = {
 		y: window.pageYOffset

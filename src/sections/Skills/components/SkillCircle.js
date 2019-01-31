@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import {TEAL, LIGHT_GREY, hexToRGB} from '../colors'
+import {TEAL, LIGHT_GREY, hexToRGB} from 'utils/colors'
 
 const ratingToSize = (rating) => ((rating + 5) * 5/3) + "vw"
 

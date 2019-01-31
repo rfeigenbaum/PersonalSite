@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import ColorPairs from '../colors'
-import anime from 'animejs';
-import $ from 'jquery';
 import scrollToAnchor from './ScrollToAnchor'
 
 const NavItem_ListItem = styled.li`

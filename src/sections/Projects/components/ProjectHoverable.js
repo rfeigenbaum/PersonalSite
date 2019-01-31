@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled, {keyframes} from 'styled-components';
 import animate, {getSide} from './HoverableAnimation';
 import anime from 'animejs';
-import {TEAL, hexToRGB} from '../colors'
+import {TEAL, hexToRGB} from '../../../utils/colors'
 
 
 let ProjectContainer = styled.div`

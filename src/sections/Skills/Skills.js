@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from "gatsby"
-import {TEAL, LIGHT_GREY, hexToRGB} from '../components/colors'
+import {TEAL, LIGHT_GREY, hexToRGB} from 'utils/colors'
 import anime from 'animejs';
 
-import SkillCircle from '../components/Skills/SkillCircle'
+import SkillCircle from './components/SkillCircle'
 
 const Conatiner = styled.div`
 	width: 100vw;

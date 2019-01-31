@@ -5,15 +5,14 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 import Section from '../components/Sections/Section';
-import ColorPairs from '../components/colors';
-import DividedSection from '../components/Sections/DividedSection';
-import Home from '../containers/Home';
-import About from '../containers/About';
-import WorkExperience from '../containers/WorkExperience'
-import Education from '../containers/Education';
-import Projects from '../containers/Projects';
-import Skills from '../containers/Skills';
-import Contact from '../containers/Contact';
+import ColorPairs from 'utils/colors';
+import Home from '../sections/Home';
+import About from '../sections/About';
+import WorkExperience from '../sections/WorkExperience'
+import Education from '../sections/Education';
+import Projects from '../sections/Projects';
+import Skills from '../sections/Skills';
+import Contact from '../sections/Contact';
 
 const IndexPage = () => (
 	<div>

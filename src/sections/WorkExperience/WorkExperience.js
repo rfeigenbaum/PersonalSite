@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from "gatsby"
-import ExperienceItem from '../components/Experiences/ExperienceItem';
+import ExperienceItem from './components/ExperienceItem';
 
 const Conatiner = styled.div`
 	max-width: 1300px;

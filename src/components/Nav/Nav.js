@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 //import * as ScrollMagic from 'scrollmagic'
-import ColorPairs from '../colors'
+import ColorPairs from 'utils/colors'
 import NavItem from './NavItem'
 import scrollToAnchor from './ScrollToAnchor'
 //import NavHeader from './NavHeader';

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from "gatsby"
-import {getCompliment} from '../components/colors'
-import VerticallyAligned from '../components/Sections/VerticallyAligned';
+import {getCompliment} from 'utils/colors'
+import VerticallyAligned from 'components/Sections/VerticallyAligned';
 
 
 const Conatiner = styled.div`
