@@ -1,3 +1,5 @@
+var Color = require('color');
+
 export const DARK_GREY = "#222831"
 export const GREY = "#393e46"
 // TODO: Confirm this color is actually considered teal
@@ -5,6 +7,8 @@ export const TEAL = "#00adb5"
 export const LIGHT_GREY = "#eeeeee"
 export const WHITE = "#FFF"
 export const BLACK = "#000"
+
+export const Teal = Color("#00adb5");
 
 export const hexToRGB = (hex, alpha) => {
     var r = parseInt(hex.slice(1, 3), 16),
