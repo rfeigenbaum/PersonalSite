@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ColorPairs from 'utils/colors'
 import NavItem from './NavItem'
 import scrollToAnchor from './ScrollToAnchor'
+import SimpleScrollWatch from '../../utils/simpleScrollWatch';
 //import NavHeader from './NavHeader';
 
 
@@ -11,8 +12,9 @@ import scrollToAnchor from './ScrollToAnchor'
 const Nav = styled.nav`
 	width: 100vw;
 	z-index: 1000;
-	position: absolute; 
-	bottom: 0;
+	position: ${props => props.sticky ? "fixed" : "absolute"};
+	bottom: ${props => props.sticky ? null : 0};
+	top: ${props => props.sticky ? 0 : null};
 	background: ${ColorPairs.darkGrey.main};
 	after {
 		content: "";
@@ -29,8 +31,8 @@ const NavItems = styled.ul`
 
 const NavHeaderStyled = styled.h2`
 	color: ${ColorPairs.lightGrey.main};
-	position: absolute;
-	top: 100%;
+	position: ${props => props.sticky ? "fixed" : "absolute"};
+	top: ${props => props.sticky ? 0 : "100%"};
 	left: 0;
 	z-index: 1001;
 	padding: 4px;
@@ -44,33 +46,36 @@ const NavHeaderStyled = styled.h2`
 export default class NavBar extends Component {
 	constructor() {
 		super();
+		this.state = {
+			stickyNav: false,
+			stickyHeader: false
+		}
+		this.mainNav = React.createRef();
+
+		this.navBarScrollWatch = null;
+		this.headerScrollWatch = null;
 	}
 	componentDidMount() {
 		if (typeof window !== 'undefined') {
-			this.ScrollMagic = require('scrollmagic')
-			this.controller = new this.ScrollMagic.Controller({
-				loglevel: 2
-			});
-			new this.ScrollMagic.Scene({
-				triggerElement: "#main-nav"
-			})
-			.triggerHook("onLeave")
-			.setPin("#main-nav", {pushFollowers: false}) // pins the element for the the scene's duration
-			.addTo(this.controller); // assign the scene to the controller
-
-			new this.ScrollMagic.Scene({
-				triggerElement: "#nav-header"
-			})
-			.triggerHook("onLeave")
-			.setPin("#nav-header", {pushFollowers: false}) // pins the element for the the scene's duration
-			.addTo(this.controller); // assign the scene to the controller
+			this.navBarScrollWatch = new SimpleScrollWatch("#home", 1, this.getNavAnchorOffset, this.navCallback)
+			this.headerScrollWatch = new SimpleScrollWatch("#about", 0, 0, this.headerCallback)
 		}
+	}
+	getNavAnchorOffset = () => 0-this.mainNav.current.offsetHeight;
+	navCallback = (sticky) => {
+		this.setState({stickyNav: sticky})
+		return !sticky;
+	}
+	headerCallback = (sticky) => {
+		this.setState({stickyHeader: sticky})
+		console.log("header triggered")
+		return !sticky;
 	}
 	render() {
 		return (
 			<div>
-				<NavHeaderStyled onClick={() => scrollToAnchor("#home")} id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
-				<Nav id="main-nav">
+				<NavHeaderStyled sticky={this.state.stickyHeader} onClick={() => scrollToAnchor("#home")} id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
+				<Nav sticky={this.state.stickyNav} id="main-nav" ref={this.mainNav}>
 					
 					<NavItems>
 						
