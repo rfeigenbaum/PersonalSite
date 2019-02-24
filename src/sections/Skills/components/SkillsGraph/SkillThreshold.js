@@ -19,12 +19,14 @@ const Title = styled.h1`
 	top: ${props => "-" + (props.fontSize * 1.2) + "px"};
 	font-weight: 700;
 	color: ${hexToRGB(TEAL, .5)};
+	margin-left: 5px;
 `
 const Description = styled.h1`
 	${HeadingBase}
 	font-size: ${props => props.fontSize + "px"};
 	top: 0;
 	color: ${hexToRGB(TEAL, .4)};
+	margin-left: 5px;
 `
 const Line = styled.hr`
 	display: block;
