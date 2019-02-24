@@ -46,6 +46,7 @@ const NavHeaderStyled = styled.h2`
 	margin: 0;
 	cursor: pointer;
 	font-weight: 600;
+	font-size: 36px;
 `
 
 const HEIGHT = "56px";

@@ -6,7 +6,7 @@ import VerticallyAligned from 'components/Sections/VerticallyAligned';
 
 
 const Conatiner = styled.div`
-	max-width: 1200px;
+	max-width: 1400px;
 	margin: 0 auto;
 	min-height: 100vh;
 	display: flex;
