@@ -3,8 +3,9 @@ import styled from 'styled-components';
 //import * as ScrollMagic from 'scrollmagic'
 import ColorPairs from 'utils/colors'
 import NavItem from './NavItem'
-import scrollToAnchor from './ScrollToAnchor'
+import scrollToAnchor from '../../utils/scrollToAnchor'
 import SimpleScrollWatch from '../../utils/simpleScrollWatch';
+import { hexToRGB } from '../../utils/colors';
 //import NavHeader from './NavHeader';
 
 
@@ -13,13 +14,17 @@ const Nav = styled.nav`
 	width: 100vw;
 	z-index: 1000;
 	position: ${props => props.sticky ? "fixed" : "absolute"};
-	bottom: ${props => props.sticky ? null : 0};
-	top: ${props => props.sticky ? 0 : null};
-	background: ${ColorPairs.darkGrey.main};
+	top: ${props => props.sticky ? 0 : `calc(100vh - ${props.height})`};
+	height: ${props => props.height};
+	background: ${ hexToRGB(ColorPairs.darkGrey.main, .8)};
+	transition: background .5s;
 	after {
 		content: "";
 		display: table;
 		clear: both;
+	}
+	:hover {
+		background: ${ColorPairs.darkGrey.main};
 	}
 `
 const NavItems = styled.ul`
@@ -32,7 +37,7 @@ const NavItems = styled.ul`
 const NavHeaderStyled = styled.h2`
 	color: ${ColorPairs.lightGrey.main};
 	position: ${props => props.sticky ? "fixed" : "absolute"};
-	top: ${props => props.sticky ? 0 : "100%"};
+	top: ${props => props.sticky ? 0 : "calc(100vh - 1px)"};
 	left: 0;
 	z-index: 1001;
 	padding: 4px;
@@ -42,6 +47,8 @@ const NavHeaderStyled = styled.h2`
 	cursor: pointer;
 	font-weight: 600;
 `
+
+const HEIGHT = "56px";
 
 export default class NavBar extends Component {
 	constructor() {
@@ -72,10 +79,11 @@ export default class NavBar extends Component {
 		return !sticky;
 	}
 	render() {
+		let height = HEIGHT;
 		return (
 			<div>
-				<NavHeaderStyled sticky={this.state.stickyHeader} onClick={() => scrollToAnchor("#home")} id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
-				<Nav sticky={this.state.stickyNav} id="main-nav" ref={this.mainNav}>
+				<NavHeaderStyled height={height} sticky={this.state.stickyHeader} onClick={() => scrollToAnchor("#home")} id="nav-header">Ryan Feigenbaum</NavHeaderStyled>
+				<Nav height={height} sticky={this.state.stickyNav} id="main-nav" ref={this.mainNav}>
 					
 					<NavItems>
 						

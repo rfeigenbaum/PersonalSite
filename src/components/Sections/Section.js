@@ -12,6 +12,7 @@ const SectionDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	scroll-snap-align: start;
 `
 
 export default class Section extends Component {
@@ -19,7 +20,7 @@ export default class Section extends Component {
 		const {children, style, colors, id} = this.props;
 		return (
 			<ThemeProvider theme={colors}>
-				<SectionDiv style={style} id={id}>
+				<SectionDiv className="section" style={style} id={id}>
 					{children}
 				</SectionDiv>
 			</ThemeProvider>

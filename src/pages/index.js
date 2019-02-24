@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Link } from 'gatsby'
+import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Image from '../components/image'
@@ -13,32 +14,58 @@ import Education from '../sections/Education';
 import Projects from '../sections/Projects';
 import Skills from '../sections/Skills';
 import Contact from '../sections/Contact';
+import MagneticScroll from '../utils/magneticScroll';
 
-const IndexPage = () => (
-	<div>
-		<Section colors={ColorPairs.darkGrey} id="home">
-			<Home />
-		</Section>
-		<Section colors={ColorPairs.lightGrey} id="about">
-			<About />
-		</Section>
-		<Section colors={ColorPairs.grey} id="experience">
-			<WorkExperience />
-		</Section>
-		<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
-			<Education />
-		</Section>
-		<Section colors={ColorPairs.grey} id="projects">
-			<Projects />
-		</Section>
-		<Section colors={ColorPairs.lightGrey} id="skills">
-			<Skills />
-		</Section>
-		<Section colors={ColorPairs.darkGrey} id="contact">
-			<Contact />
-		</Section>
-	</div>
-  
-)
+import ReactFullpage from '@fullpage/react-fullpage';
+import Nav from '../components/Nav/Nav';
 
-export default IndexPage
+
+const Container = styled.div`
+	height: 100vh;
+	overflow: scroll;
+	scroll-snap-type: mandatory;
+    scroll-snap-points-y: repeat(100vh);
+	scroll-snap-type: y mandatory;
+`
+
+export default class IndexPage extends Component {
+	componentDidMount() {
+		this.magneticScroll = new MagneticScroll('section')
+	}
+	render() {
+		return (
+			<ReactFullpage
+				scrollBar={true}
+				render={({ state, fullpageApi }) => {
+					return (
+						<ReactFullpage.Wrapper>
+							<Nav />
+							<Section colors={ColorPairs.darkGrey} id="home">
+								<Home />
+							</Section>
+							<Section colors={ColorPairs.lightGrey} id="about">
+								<About />
+							</Section>
+							<Section colors={ColorPairs.grey} id="experience">
+								<WorkExperience />
+							</Section>
+							<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
+								<Education />
+							</Section>
+							<Section colors={ColorPairs.grey} id="projects">
+								<Projects />
+							</Section>
+							<Section colors={ColorPairs.lightGrey} id="skills">
+								<Skills />
+							</Section>
+							<Section colors={ColorPairs.darkGrey} id="contact">
+								<Contact />
+							</Section>
+						</ReactFullpage.Wrapper>
+					)}}
+			/>
+		)
+	}
+	
+}
+

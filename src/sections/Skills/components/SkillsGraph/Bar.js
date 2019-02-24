@@ -43,18 +43,34 @@ const BarText = styled.div`
 
 
 export default class Bar extends Component {
+	static getDerivedStateFromProps(nextProps, prevState)  {
+		if(prevState.name !== nextProps.name || prevState.height !== nextProps.height || prevState.width !== nextProps.width) {
+			console.log(nextProps.name)
+			return {
+				fontSize: null, 
+				prevName: nextProps.name, 
+				prevHeight: nextProps.height,
+				prevWidth: nextProps.width
+			}
+		}
+		return null
+	}
 	constructor(props) {
 		super(props)
 
 		this.text = React.createRef();
 
 		this.state = {
-			fontSize: null
+			fontSize: null, 
+			prevName: null, 
+			prevHeight: null,
+			prevWidth: null
 		}
 	}
 	shrinkUntilFits = () => {
 		let newFontSize;
 		let barText = this.text.current;
+		
 		while(barText.offsetWidth >= (this.props.height - 30)) {
 			let fontSize = parseFloat(window.getComputedStyle(barText, null).getPropertyValue('font-size'));
 			newFontSize = (fontSize * .95);
@@ -71,8 +87,10 @@ export default class Bar extends Component {
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		let {name, height, width} = this.props;
-		if(name !== prevProps.name || height !== prevProps.height || width !== prevProps.height) {
+		//console.log(this.state.fontSize)
+		if(name !== prevProps.name || height !== prevProps.height || width !== prevProps.width) {
 			let barText = this.text.current;
+			barText.style.fontSize = null;
 			if(barText.offsetWidth >= (this.props.height - 20)) {
 				this.shrinkUntilFits();
 			}
@@ -82,8 +100,8 @@ export default class Bar extends Component {
 
 	render() {
 		const {name, left, height, width, color} = this.props;
-		let fontSize = this.state.fontSize || width*.4;
-
+		let fontSize = this.state.fontSize ? this.state.fontSize : width*.4;
+		console.log(this.state)
 		return (
 			<BarContainer color={color} height={height} width={width} left={left}>
 				<BarText fontSize={fontSize} height={height} width={width}>

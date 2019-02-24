@@ -18,7 +18,5 @@ export default () => (
 	<Container>
 		<Name>Ryan Feigenbaum</Name>
 		<h1>Developer.</h1>
-		<NavTrigger id="nav-trigger" />
-		<Nav />
 	</Container>
 )

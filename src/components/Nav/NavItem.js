@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import scrollToAnchor from './ScrollToAnchor'
+import scrollToAnchor from '../../utils/scrollToAnchor'
 
 const NavItem_ListItem = styled.li`
 	text-align: center;
