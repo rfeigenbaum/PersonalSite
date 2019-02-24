@@ -12,7 +12,6 @@ const SectionDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	scroll-snap-align: start;
 `
 
 export default class Section extends Component {

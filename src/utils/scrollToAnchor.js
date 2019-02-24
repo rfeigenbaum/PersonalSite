@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import anime from 'animejs';
 
-export default (anchor, duration, completeCallback) => {
-	let offsetFromTop = $(anchor).offset().top
+export default (anchor, offset = 0, duration, completeCallback) => {
+	let offsetFromTop = $(anchor).offset().top + offset;
 
 	let d = duration || 700;
 	
