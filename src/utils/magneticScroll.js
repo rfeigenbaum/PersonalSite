@@ -1,56 +1,137 @@
 import $ from 'jquery';
 import getScrollOffset from './scrollOffset';
 import ScrollToAnchor from './scrollToAnchor';
+import Debounce from './debounce'
 
-const VelocityRequired = 6
+const VelocityRequired = 10
+const DebouncePeriod = 100;
 
 export default class MagneticScroll {
 	constructor(className) {
 		this.className = className;
 		this.elems = Array.from(document.getElementsByClassName(className));
 
-		this.prevScrollPosition = getScrollOffset().y;
+		this.allowScrollEvent = true;
+		this.allowScrollWithinSection = true;
+		this.scrollEventTimer = null;
 
-		//window.addEventListener("mousewheel", this.scrolled, false);
-		// Firefox
-		//window.addEventListener("DOMMouseScroll", this.scrolled, false);
+		this.scrollDisabled = false;
 
-		this.scrollDisabled = false
+		this.debounce = new Debounce(this.getVelocity, this.scrolled, DebouncePeriod);
+
+		$(window).on('mousewheel DOMMouseScroll', this.mouseScrollEvent);
+
+		
 	}
-	scrolled = (event) => {
-		event.preventDefault()
+
+	getVelocity = (jEvent) => jEvent.originalEvent.deltaY;
+
+	withinElement = (elem, scrollPosition, velocity) => {
+		let topOfElem = $(elem).offset().top;
+		let windowHeight = this.getWindowHeight();
+		//Scrolling Up
+		if(velocity < 0) {
+			if(scrollPosition + velocity >= topOfElem) {
+				return true;
+			}
+		}
+		//Scrolling Down
+		else {
+			if(scrollPosition + windowHeight + velocity <= topOfElem + elem.offsetHeight) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	mouseScrollEvent = (event) => {
+		
+
+		let velocity = this.getVelocity(event);
+		let currentPosition = getScrollOffset().y;
+		let currentElem = this.elems[this.getCurrentElemIndex(currentPosition)];
+
+		let movedWithinSection = false;
+		if(!this.scrollDisabled){
+			if(Math.abs(velocity) > 1 && this.allowScrollWithinSection) {
+				if(this.withinElement(currentElem, currentPosition, velocity)) {
+					window.scrollBy(0, velocity);
+					movedWithinSection = true;
+					this.allowScrollEvent = false;
+
+					if(this.scrollEventTimer) {
+						clearTimeout(this.scrollEventTimer);
+					}
+					this.scrollEventTimer = setTimeout(() => this.allowScrollEvent = true, 50);
+				}
+			}
+			if(!movedWithinSection && this.allowScrollEvent) {
+				this.debounce.func(event);
+			}
+		}
+		
+		return false;
+	}
+
+	scrolled = (velocities) => {
 		let newPosition = getScrollOffset().y;
-		let currentElemIndex = this.getCurrentElemIndex(newPosition);
-		console.log(event)
-		if(event.deltaY > VelocityRequired && !this.scrollDisabled) {
-			this.prevScrollPosition = newPosition;
-			if(currentElemIndex + 1 < this.elems.length) {
-				this.scrollToIndex(currentElemIndex + 1)
+
+		let velocity = velocities.reduce((a, b) => a + b) / velocities.length;
+
+		if(Math.abs(velocity) > VelocityRequired && !this.scrollDisabled) {
+			let direction = velocity > 0 ? 1 : -1;
+			let currentElemIndex = velocity > 0 ? 
+				this.getCurrentElemIndex(newPosition, .1) : this.getCurrentElemIndex(newPosition, .9);
+
+			let idealDistance = Math.floor(Math.pow(Math.abs(velocity), 1/2)/3.5) * direction;
+
+			if(Math.abs(idealDistance) > 0) {
+
+				let newIndex = currentElemIndex + idealDistance
+				while(newIndex < 0 && newIndex >= this.elems.length ) {
+					idealDistance = (Math.abs(idealDistance) - 1) * direction;
+					newIndex = currentElemIndex + idealDistance;
+				}
+
+				//let newIndex = currentElemIndex + direction;
+
+				if(newIndex >= 0 && newIndex < this.elems.length) {
+					if(direction === -1) {
+						let offset = this.elems[newIndex].offsetHeight - this.getWindowHeight();
+						offset = offset > 0 ? offset : 0;
+						this.scrollToIndex(newIndex, offset)
+					}
+					else {
+						this.scrollToIndex(newIndex);
+					}
+				}
 			}
-			
 		}
-		else if(event.deltaY < -1*VelocityRequired && !this.scrollDisabled) {
-			this.prevScrollPosition = newPosition;
-			if(currentElemIndex - 1  >= 0) {
-				this.scrollToIndex(currentElemIndex - 1)
-			}
-			
-		}
-		
-		
 	}
 
-	enableScroll = (delay) => {
-		setTimeout(() => this.scrollDisabled = false, delay);
+	enableScroll = () => {
+		if(this.enableScrollTimeout !== null) {
+			clearInterval(this.enableScrollTimeout);
+			this.enableScrollTimeout = null;
+		}
+		this.enableScrollTimeout = setTimeout(() => this.scrollDisabled = false, 100);
+
+		if(this.enableScrollWithinSectionTimeout !== null) {
+			clearInterval(this.enableScrollWithinSectionTimeout);
+			this.enableScrollWithinSectionTimeout = null;
+		}
+		this.enableScrollWithinSectionTimeout = setTimeout(() => this.allowScrollWithinSection = true, 500);
 	}
 
-	scrollToIndex = (index) => {
+	scrollToIndex = (index, offset, duration = 500) => {
 		this.scrollDisabled = true;
-		ScrollToAnchor("#" + this.elems[index].id, 500, () => this.scrollDisabled = false);
+		this.allowScrollWithinSection = false;
+		ScrollToAnchor("#" + this.elems[index].id, offset, duration, this.enableScroll);
 	}
 
-	getCurrentElemIndex = (scrollPosition) => {
-		let middleOfScreen = scrollPosition + this.getWindowHeight()/2;
+	getCurrentElemIndex = (scrollPosition, percentHeightOfScreen) => {
+		let _percentHeightOfScreen = percentHeightOfScreen || .5;
+		let middleOfScreen = scrollPosition + this.getWindowHeight() * _percentHeightOfScreen;
 		let index = this.elems.findIndex((elem) => {
 			let distanceFromTop = $(elem).offset().top
 			return distanceFromTop < middleOfScreen && (distanceFromTop + elem.offsetHeight) > middleOfScreen;
@@ -68,12 +149,4 @@ export default class MagneticScroll {
 	}
 }
 
-function throttle(fn, wait) {
-	var time = Date.now();
-	return function() {
-		if ((time + wait - Date.now()) < 0) {
-			fn();
-			time = Date.now();
-		}
-	}
-}
+

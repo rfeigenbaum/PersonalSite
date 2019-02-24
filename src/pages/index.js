@@ -23,9 +23,6 @@ import Nav from '../components/Nav/Nav';
 const Container = styled.div`
 	height: 100vh;
 	overflow: scroll;
-	scroll-snap-type: mandatory;
-    scroll-snap-points-y: repeat(100vh);
-	scroll-snap-type: y mandatory;
 `
 
 export default class IndexPage extends Component {
@@ -34,36 +31,30 @@ export default class IndexPage extends Component {
 	}
 	render() {
 		return (
-			<ReactFullpage
-				scrollBar={true}
-				render={({ state, fullpageApi }) => {
-					return (
-						<ReactFullpage.Wrapper>
-							<Nav />
-							<Section colors={ColorPairs.darkGrey} id="home">
-								<Home />
-							</Section>
-							<Section colors={ColorPairs.lightGrey} id="about">
-								<About />
-							</Section>
-							<Section colors={ColorPairs.grey} id="experience">
-								<WorkExperience />
-							</Section>
-							<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
-								<Education />
-							</Section>
-							<Section colors={ColorPairs.grey} id="projects">
-								<Projects />
-							</Section>
-							<Section colors={ColorPairs.lightGrey} id="skills">
-								<Skills />
-							</Section>
-							<Section colors={ColorPairs.darkGrey} id="contact">
-								<Contact />
-							</Section>
-						</ReactFullpage.Wrapper>
-					)}}
-			/>
+			<>
+				<Nav />
+				<Section colors={ColorPairs.darkGrey} id="home">
+					<Home />
+				</Section>
+				<Section colors={ColorPairs.lightGrey} id="about">
+					<About />
+				</Section>
+				<Section colors={ColorPairs.grey} id="experience">
+					<WorkExperience />
+				</Section>
+				<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
+					<Education />
+				</Section>
+				<Section colors={ColorPairs.grey} id="projects">
+					<Projects />
+				</Section>
+				<Section colors={ColorPairs.lightGrey} id="skills">
+					<Skills />
+				</Section>
+				<Section colors={ColorPairs.darkGrey} id="contact">
+					<Contact />
+				</Section>
+			</>
 		)
 	}
 	

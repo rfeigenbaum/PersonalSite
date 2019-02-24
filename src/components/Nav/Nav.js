@@ -66,7 +66,7 @@ export default class NavBar extends Component {
 	componentDidMount() {
 		if (typeof window !== 'undefined') {
 			this.navBarScrollWatch = new SimpleScrollWatch("#home", 1, this.getNavAnchorOffset, this.navCallback)
-			this.headerScrollWatch = new SimpleScrollWatch("#about", 0, 0, this.headerCallback)
+			this.headerScrollWatch = new SimpleScrollWatch("#about", 0, -2, this.headerCallback)
 		}
 	}
 	getNavAnchorOffset = () => 0-this.mainNav.current.offsetHeight;

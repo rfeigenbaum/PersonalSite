@@ -5,7 +5,7 @@ import ExperienceItem from './components/ExperienceItem';
 
 const Conatiner = styled.div`
 	max-width: 1400px;
-	margin: 0 auto;
+	margin: 50px auto 0;
 `
 
 
