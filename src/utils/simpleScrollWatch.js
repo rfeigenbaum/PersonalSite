@@ -20,7 +20,10 @@ export default class SimpleScrollWatch {
 			this.updateTargetPosition();
 			this.scrolled();
 		});
-
+		document.addEventListener("DOMContentLoaded", () => {
+			this.updateTargetPosition();
+			this.scrolled();
+		});
 	}
 
 	updateTargetPosition = () => {
