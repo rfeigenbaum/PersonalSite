@@ -24,15 +24,20 @@ export default class NavItem extends Component {
 	}
 	onClick = (e) => {
 		e.preventDefault();
-		console.log(e)
-		scrollToAnchor(this.props.href);
+		console.log(this.props)
+		const {scrollManager, href} = this.props;
+		//console.log(e)
+		//scrollToAnchor(this.props.href);
+		scrollManager.scrollToAnchor(href);
 	}
 	render() {
-		const {href, children, ...otherProps} = this.props;
-		console.log("sup")
+		const {href, children, scrollManager, ...otherProps} = this.props;
+		
+		let navAnchor = href.substring(1) + "Nav";
+
 		return (
 			<NavItem_ListItem {...otherProps}>
-				<NavItem_Link onClick={this.onClick} href={href}>{children}</NavItem_Link>
+				<NavItem_Link id={navAnchor} onClick={this.onClick} href={href}>{children}</NavItem_Link>
 			</NavItem_ListItem>
 		)
 	}

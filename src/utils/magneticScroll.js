@@ -19,9 +19,27 @@ export default class MagneticScroll {
 
 		this.debounce = new Debounce(this.getVelocity, this.scrolled, DebouncePeriod);
 
-		$(window).on('mousewheel DOMMouseScroll', this.mouseScrollEvent);
+		this.listeners = [];
 
+		$(window).on('mousewheel DOMMouseScroll', this.mouseScrollEvent);
 		
+		$(document).ready(this.resetPosition)
+
+		window.addEventListener('resize', () => {
+			clearTimeout(this.resizeId);
+			this.resizeId = setTimeout(this.onResize, 500);
+		});
+		
+	}
+
+	onResize = () => {
+		this.resetPosition();
+	}
+
+	resetPosition = () => {
+		let currentPosition = getScrollOffset().y;
+		let currentElemIndex = this.getCurrentElemIndex(currentPosition);
+		this.scrollToIndex(currentElemIndex);
 	}
 
 	getVelocity = (jEvent) => jEvent.originalEvent.deltaY;
@@ -126,7 +144,16 @@ export default class MagneticScroll {
 	scrollToIndex = (index, offset, duration = 500) => {
 		this.scrollDisabled = true;
 		this.allowScrollWithinSection = false;
-		ScrollToAnchor("#" + this.elems[index].id, offset, duration, this.enableScroll);
+		this.scrollToAnchor("#" + this.elems[index].id, offset, duration, this.enableScroll);
+	}
+
+	scrollToAnchor = (anchor, offset = 0, duration, completeCallback) => {
+		ScrollToAnchor(anchor, offset, duration, completeCallback);
+		this.listeners.forEach(callback => callback(anchor));
+	}
+
+	subscribeToSectionChanges = (callback) => {
+		this.listeners.push(callback);
 	}
 
 	getCurrentElemIndex = (scrollPosition, percentHeightOfScreen) => {
@@ -138,6 +165,14 @@ export default class MagneticScroll {
 		})
 		return index;
 	}
+
+	getCurrentAnchor = () => {
+		let scrollPos = getScrollOffset().y;
+		let currentElemIndex = this.getCurrentElemIndex(scrollPos, .5);
+		console.log("current anchor")
+		return "#" + this.elems[currentElemIndex].id
+	}
+
 	getWindowHeight = () => {
 		var w = window,
 			d = document,

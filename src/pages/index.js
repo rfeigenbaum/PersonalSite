@@ -26,13 +26,21 @@ const Container = styled.div`
 `
 
 export default class IndexPage extends Component {
+	constructor() {
+		super();
+		this.state = {
+			scrollManager: null
+		}
+	}
 	componentDidMount() {
-		this.magneticScroll = new MagneticScroll('section')
+		let magneticScroll = new MagneticScroll('section')
+		this.setState({scrollManager: magneticScroll})
 	}
 	render() {
+		const {scrollManager} = this.state;
 		return (
 			<>
-				<Nav />
+				<Nav scrollManager={scrollManager} />
 				<Section colors={ColorPairs.darkGrey} id="home">
 					<Home />
 				</Section>
