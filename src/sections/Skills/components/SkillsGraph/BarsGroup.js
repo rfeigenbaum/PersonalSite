@@ -35,7 +35,7 @@ export default class BarsGroup extends Component {
 		if(dimensions) {
 			bars = data.sort(SkillSort ).map((skill, index) => {
 				//let left = Math.min(index/num_bars * 100, 20*index);
-				let widthPercentage = num_bars > 9 ? 9 : 100/(num_bars+1);
+				let widthPercentage = Math.min(num_bars > 9 ? 9 : 100/(num_bars+1), 10);
 				let width = widthPercentage/100 * dimensions.width
 				let left = ((width + (.01 * dimensions.width)) * index);
 				let height = skill.rating/scale * dimensions.height;
