@@ -29,7 +29,44 @@ export default class MagneticScroll {
 			clearTimeout(this.resizeId);
 			this.resizeId = setTimeout(this.onResize, 500);
 		});
+		window.addEventListener('keydown', this.arrowKeyListener);
 		
+	}
+
+	arrowKeyListener = (event) => {
+		const 	LEFT = 37,
+				UP = 38,
+				RIGHT = 39,
+				DOWN = 40;
+		let keycode = (event.which) ? event.which : event.keyCode;
+		switch (keycode) {
+			case UP:
+				event.preventDefault();
+				this.scrollToPrev();
+				break;
+			case DOWN:
+				event.preventDefault();
+				this.scrollToNext();
+				break;
+		}
+		/*switch (keyCodeNumber) {
+
+		}*/
+	}
+
+	scrollToNext = () => {
+		let currentPosition = getScrollOffset().y;
+		let currentElemIndex = this.getCurrentElemIndex(currentPosition);
+		if(currentElemIndex + 1 < this.elems.length) {
+			this.scrollToIndex(currentElemIndex + 1);
+		}
+	}
+	scrollToPrev = () => {
+		let currentPosition = getScrollOffset().y;
+		let currentElemIndex = this.getCurrentElemIndex(currentPosition);
+		if(currentElemIndex - 1 >= 0) {
+			this.scrollToIndex(currentElemIndex - 1);
+		}
 	}
 
 	onResize = () => {

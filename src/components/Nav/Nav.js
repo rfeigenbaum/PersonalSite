@@ -22,6 +22,7 @@ const Nav = styled.nav`
 	top: ${props => props.sticky ? 0 : `calc(100vh - ${props.height})`};
 	background: ${ hexToRGB(ColorPairs.darkGrey.main, 1)};
 	height: ${props => props.height};
+	overflow: hidden;
 	after {
 		content: "";
 		display: table;
