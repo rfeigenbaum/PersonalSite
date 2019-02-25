@@ -39,19 +39,28 @@ export default class MagneticScroll {
 				RIGHT = 39,
 				DOWN = 40;
 		let keycode = (event.which) ? event.which : event.keyCode;
-		switch (keycode) {
-			case UP:
-				event.preventDefault();
-				this.scrollToPrev();
-				break;
-			case DOWN:
-				event.preventDefault();
-				this.scrollToNext();
-				break;
+		if(keycode === UP || keycode === DOWN) {
+			event.preventDefault();
+			let currentPosition = getScrollOffset().y;
+			let currentElemIndex = this.getCurrentElemIndex(currentPosition);
+			if(this.scrollThroughKey) {
+				let newIndex = keycode === UP ? this.newIndex - 1 : this.newIndex + 1;
+				if(newIndex >= 0 && newIndex < this.elems.length) {
+					this.anime.pause();
+					this.newIndex = newIndex;
+					this.anime = this.scrollToIndex(this.newIndex, 0, null, () => this.scrollThroughKey = false); 
+				}
+			}
+			else {
+				this.scrollThroughKey = true;
+				let newIndex = keycode === UP ? currentElemIndex - 1 : currentElemIndex + 1;
+				if(newIndex >= 0 && newIndex < this.elems.length) {
+					this.newIndex = newIndex;
+					this.anime = this.scrollToIndex(this.newIndex, 0, null, () => this.scrollThroughKey = false); 
+				}
+				
+			}
 		}
-		/*switch (keyCodeNumber) {
-
-		}*/
 	}
 
 	scrollToNext = () => {
@@ -100,8 +109,6 @@ export default class MagneticScroll {
 	}
 
 	mouseScrollEvent = (event) => {
-		
-
 		let velocity = this.getVelocity(event);
 		let currentPosition = getScrollOffset().y;
 		let currentElem = this.elems[this.getCurrentElemIndex(currentPosition)];
@@ -178,15 +185,22 @@ export default class MagneticScroll {
 		this.enableScrollWithinSectionTimeout = setTimeout(() => this.allowScrollWithinSection = true, 500);
 	}
 
-	scrollToIndex = (index, offset, duration = 500) => {
+	scrollToIndex = (index, offset, duration = 500, completeCallback) => {
+		let fn = this.enableScroll;
+		if(completeCallback) {
+			fn = () => {
+				this.enableScroll();
+				completeCallback();
+			}
+		}
 		this.scrollDisabled = true;
 		this.allowScrollWithinSection = false;
-		this.scrollToAnchor("#" + this.elems[index].id, offset, duration, this.enableScroll);
+		return this.scrollToAnchor("#" + this.elems[index].id, offset, duration, fn);
 	}
 
 	scrollToAnchor = (anchor, offset = 0, duration, completeCallback) => {
-		ScrollToAnchor(anchor, offset, duration, completeCallback);
 		this.listeners.forEach(callback => callback(anchor));
+		return ScrollToAnchor(anchor, offset, duration, completeCallback);
 	}
 
 	subscribeToSectionChanges = (callback) => {

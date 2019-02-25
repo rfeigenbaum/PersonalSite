@@ -9,7 +9,7 @@ export default (anchor, offset = 0, duration, completeCallback) => {
 	const scrollCoords = {
 		y: window.pageYOffset
 	}
-	anime({
+	return anime({
 		targets: scrollCoords,
 		y: offsetFromTop,
 		duration: d,
