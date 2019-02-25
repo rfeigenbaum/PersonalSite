@@ -39,7 +39,7 @@ export default class IndexPage extends Component {
 	render() {
 		const {scrollManager} = this.state;
 		return (
-			<>
+			<Layout>
 				<Nav scrollManager={scrollManager} />
 				<Section colors={ColorPairs.darkGrey} id="home">
 					<Home />
@@ -62,7 +62,7 @@ export default class IndexPage extends Component {
 				<Section colors={ColorPairs.darkGrey} id="contact">
 					<Contact />
 				</Section>
-			</>
+			</Layout>
 		)
 	}
 	

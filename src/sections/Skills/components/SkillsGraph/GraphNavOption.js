@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 
-const Title = styled.h3`
+const Title = styled.h4`
 	display: inline-block;
 	margin: 0 10px;
 	color: ${props => props.isSelected ? "#42454c" : "#a2a5ac"};

@@ -4,7 +4,6 @@ import scrollToAnchor from '../../utils/scrollToAnchor'
 
 const NavItem_ListItem = styled.li`
 	text-align: center;
-	float: left;
 	margin: 10px;
 	font-size: 26px;
 	height: 36px;

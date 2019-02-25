@@ -6,25 +6,23 @@ const Container = styled.div`
 	position: absolute;
 	bottom: ${props => props.percentage};
 	width: 100%;
+	transform: translateY(50%);
 `
 
 const HeadingBase = `
-	position: absolute;
+	position: relative;
 	margin: 0;
+	text-align: left;
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
 	${HeadingBase}
-	font-size: ${props => props.fontSize + "px"};
-	top: ${props => "-" + (props.fontSize * 1.2) + "px"};
 	font-weight: 700;
 	color: ${hexToRGB(TEAL, .5)};
 	margin-left: 5px;
 `
-const Description = styled.h1`
+const Description = styled.h2`
 	${HeadingBase}
-	font-size: ${props => props.fontSize + "px"};
-	top: 0;
 	color: ${hexToRGB(TEAL, .4)};
 	margin-left: 5px;
 `
@@ -35,7 +33,8 @@ const Line = styled.hr`
     border: 0;
     border-top: 5px solid rgba(100,100,100,.3);
     margin: 0;
-    padding: 0;
+	padding: 0;
+	position: relative;
 `
 
 export default class SkillThreshold extends Component {
@@ -43,9 +42,9 @@ export default class SkillThreshold extends Component {
 		const {title, description, percentage} = this.props;
 		return (
 			<Container percentage={percentage}>
-				<Title fontSize={60}>{title}</Title>
+				<Title>{title}</Title>
 				<Line />
-				<Description fontSize={50}>{description}</Description>
+				<Description>{description}</Description>
 			</Container>
 		)
 	}

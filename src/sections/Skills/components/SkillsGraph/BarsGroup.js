@@ -6,11 +6,16 @@ import {Teal} from 'utils/colors'
 import Measure from 'react-measure'
 
 const BarsGroupContainer = styled.div`
-	position: absolute;
 	height: 100%;
-	margin-left: ${props => props.leftMargin};
-	width: calc(100% - ${props => props.leftMargin});
+	width: 100%;
+	display: inline-flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	position: absolute;
 	left: ${props => props.left};
+	padding: 0 20px 0 10px;
+    box-sizing: border-box;
+	top: 0;
 `
 const SkillSort = (skillA, skillB) => (
 	skillB.rating  === skillA.rating  ? skillA.name.length - skillB.name.length : skillB.rating - skillA.rating
@@ -35,7 +40,7 @@ export default class BarsGroup extends Component {
 		if(dimensions) {
 			bars = data.sort(SkillSort ).map((skill, index) => {
 				//let left = Math.min(index/num_bars * 100, 20*index);
-				let widthPercentage = Math.min(num_bars > 9 ? 9 : 100/(num_bars+1), 10);
+				let widthPercentage = Math.min(num_bars > 9 ? 9 : 100/(num_bars+1), 15);
 				let width = widthPercentage/100 * dimensions.width
 				let left = ((width + (.01 * dimensions.width)) * index);
 				let height = skill.rating/scale * dimensions.height;

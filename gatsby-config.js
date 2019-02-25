@@ -5,6 +5,7 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+	`gatsby-plugin-less`,
 	{
 		resolve: 'gatsby-plugin-root-import',
 		options: {

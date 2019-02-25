@@ -4,6 +4,7 @@ import SkillThreshold from './SkillThreshold';
 import BarsGroup from './BarsGroup';
 import anime from 'animejs';
 import GraphNavOption from './GraphNavOption';
+import { GREY, LIGHT_GREY } from '../../../../utils/colors';
 
 const GraphContainer = styled.div`
 	position: absolute;
@@ -18,6 +19,31 @@ const NavOptions = styled.div`
 	bottom: calc(100% + 10px);
 `
 
+let FakedTitle = styled.h2`
+	text-align: left;
+	display: block;
+`
+
+const ContentContainer = styled.div`
+	display: flex;
+	height: 100%;
+`
+
+const SideBar = styled.div`
+	border-right: solid 3px rgba(100,100,100,.5);
+	transition: all .2s;
+	> div {
+		visibility: hidden;
+		padding: 0 10px;
+	}
+`
+const BarContainer = styled.div`
+	flex-grow: 2;
+	height: 100%;
+	overflow-x: hidden;
+	padding: 0 10px;
+	position: relative;
+`
 
 export default class SkillsGraph extends Component {
 	static getDerivedStateFromProps(nextProps, prevState) {
@@ -27,7 +53,8 @@ export default class SkillsGraph extends Component {
 		super(props);
 		this.state = {
 			selectedIndex: 0,
-			baseLeft: 0
+			baseLeft: 0,
+			moving: false
 		}
 		this.animation = null
 	}
@@ -50,7 +77,8 @@ export default class SkillsGraph extends Component {
 				duration: duration,
 				easing: 'easeInOutSine',
 				update: () => this.setState({baseLeft: temp.baseLeft}),
-				begin: () => this.setState({selectedIndex: index})
+				begin: () => this.setState({selectedIndex: index, moving: true}),
+				complete: () => this.setState({moving: false})
 			})
 		}
 		
@@ -65,17 +93,58 @@ export default class SkillsGraph extends Component {
 
 		const barGroups = data.map((set, index) => {
 			let left = baseLeft + (index * 100);
-			return <BarsGroup data={set.data} leftMargin="450px" scale="3" left={left + "%"} />
+			return <BarsGroup data={set.data} leftMargin="450px" scale="3" left={left + "%"} /> 
 		})
+
+		const skillThresholds = Thresholds.map(threshold => <SkillThreshold title={threshold.title} description={threshold.description} percentage={threshold.percentage} />);
+
+		
+
+		const skillThresholdSpacer = Thresholds.map(threshold => {
+			return (
+				<div>
+					<FakedTitle>{threshold.title}</FakedTitle>
+					<FakedTitle>{threshold.description}</FakedTitle>
+				</div>
+			)
+		});
 
 		return (
 			<GraphContainer style={style}>
-				<SkillThreshold title="advanced" description="know it well" percentage="100%" />
-				<SkillThreshold title="intermediate" description="know it" percentage="66%" />
-				<SkillThreshold title="beginner" description="used it" percentage="33%" />
+				{skillThresholds}
+				<ContentContainer>
+					<SideBar moving={this.state.moving}>
+						<div>
+							{skillThresholdSpacer}
+						</div>
+					</SideBar>
+					
+				
+					<BarContainer>
+						{barGroups}
+					</BarContainer>
+				</ContentContainer>
 				<NavOptions>{options}</NavOptions>
-				{barGroups}
+				
 			</GraphContainer>
 		)
 	}
 }
+
+const Thresholds = [
+	{
+		title: "advanced",
+		description: "know it well",
+		percentage: "100%",
+	},
+	{
+		title: "intermediate",
+		description: "know it",
+		percentage: "66%",
+	},
+	{
+		title: "beginner",
+		description: "used it",
+		percentage: "33%",
+	}
+]

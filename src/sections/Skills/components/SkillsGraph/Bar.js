@@ -5,14 +5,15 @@ import { Teal, LIGHT_GREY } from '../../../../utils/colors';
 import textWidth from 'utils/textWidth';
 import ReactFitText from 'react-fittext';
 
+import Layout from '../../../../components/layout.css'
+
 
 const BarContainer = styled.div`
-	position: absolute;
+	position: relative;
 	bottom: 0;
 	height: ${props => props.height + "px"};
 	background: ${props => props.color};
 	width: ${props => props.width + "px"};
-	left: ${props => props.left + "px"};
 	margin-left: 20px;
 	transition: .5s opacity;
 	opacity: .8;
@@ -23,17 +24,17 @@ const BarContainer = styled.div`
 `
 
 const BarText = styled.div`
-	transform: rotate(-90deg) translateY(-5px) translateX(${props => props.fontSize + "px"}) ;
+	transform: rotate(-90deg) translateY(-5px) translateX(${props => props.fontSize ? props.fontSize + "px" : "2rem"});
 	transform-origin: bottom right;
 	right: 0;
 	position: absolute;
     text-align: right;
 	color: ${LIGHT_GREY};
-	font-size: ${props => props.fontSize + "px"};
+	font-size: ${props => props.fontSize ? props.fontSize + "px" : null};
 	width: ${props => props.height + "px"};
 
 	h2 {
-		font-size: ${props => props.fontSize + "px"};
+		font-size: ${props => props.fontSize ? props.fontSize + "px" : null};
 		margin: 0;
 		display: inline;
 		overflow: hidden;
@@ -43,18 +44,6 @@ const BarText = styled.div`
 
 
 export default class Bar extends Component {
-	static getDerivedStateFromProps(nextProps, prevState)  {
-		if(prevState.name !== nextProps.name || prevState.height !== nextProps.height || prevState.width !== nextProps.width) {
-			console.log(nextProps.name)
-			return {
-				fontSize: null, 
-				prevName: nextProps.name, 
-				prevHeight: nextProps.height,
-				prevWidth: nextProps.width
-			}
-		}
-		return null
-	}
 	constructor(props) {
 		super(props)
 
@@ -76,11 +65,14 @@ export default class Bar extends Component {
 			newFontSize = (fontSize * .95);
 			barText.style.fontSize = newFontSize + "px"
 		}
+		barText.style.fontSize = null;
+		console.log(newFontSize)
 		this.setState({fontSize: newFontSize});
 	}
 	componentDidMount() {
 		let barText = this.text.current;
 		if(barText.offsetWidth >= (this.props.height - 20)) {
+			console.log("shit")
 			this.shrinkUntilFits();
 		}
 	}
@@ -92,6 +84,7 @@ export default class Bar extends Component {
 			let barText = this.text.current;
 			barText.style.fontSize = null;
 			if(barText.offsetWidth >= (this.props.height - 20)) {
+				console.log("shit")
 				this.shrinkUntilFits();
 			}
 		}
@@ -100,8 +93,7 @@ export default class Bar extends Component {
 
 	render() {
 		const {name, left, height, width, color} = this.props;
-		let fontSize = this.state.fontSize ? this.state.fontSize : width*.4;
-		console.log(this.state)
+		const {fontSize} = this.state;
 		return (
 			<BarContainer color={color} height={height} width={width} left={left}>
 				<BarText fontSize={fontSize} height={height} width={width}>
