@@ -6,21 +6,32 @@ import ProjectHoverable from './components/ProjectHoverable'
 const Conatiner = styled.div`
 	max-width: 1200px;
 	margin: 0 auto;
+	padding: 50px 10px 0 10px;
+	width: 100%;
+	box-sizing: border-box;
 `
 const ProjectContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-    width: 1200px;
+	
+	@media screen and (max-width: 720px) {
+		flex-direction: column;
+		align-items: stretch;
+	}
 `
 
 const Project = styled(ProjectHoverable)`
 	flex: 1 0 calc(25% - 10px);
 	margin: 20px;
+    width: 100%;
     max-width: 500px;
 	after {
 		content: ' ';
 		display: block;
 		padding-bottom: 100%;
+	}
+	@media screen and (max-width: 720px) {
+		margin: 20px auto;
 	}
 `
 

@@ -22,6 +22,7 @@ export default class MagneticScroll {
 		this.listeners = [];
 
 		$(window).on('mousewheel DOMMouseScroll', this.mouseScrollEvent);
+		$(window).on('touchmove', (event) => console.log(event))
 		
 		$(document).ready(this.resetPosition)
 
