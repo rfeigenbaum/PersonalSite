@@ -62,12 +62,12 @@ const NavHeaderStyled = styled.h2`
 
 const CurrentItem = styled.div`
 	position: absolute;
-	width: ${props => (props.width + 10) + "px"};
+	width: ${props => (props.width + 14) + "px"};
 	height: ${HEIGHT};
 	background: ${hexToRGB(ColorPairs.teal.main, .8)};
 	top: 0;
 	z-index: 1002;
-	right: ${props => (props.right - 5) + "px"};
+	right: ${props => (props.right - 7) + "px"};
 	transition: all .5s;
 `
 
@@ -81,7 +81,8 @@ export default class NavBar extends Component {
 			subscribed: false,
 
 			currentSectionRightPos: -200,
-			currentSectionWidth: 0
+			currentSectionWidth: 0,
+			currentAnchor: null
 		}
 		this.mainNav = React.createRef();
 
@@ -126,23 +127,29 @@ export default class NavBar extends Component {
 			console.log("changing sections")
 			this.setState({
 				currentSectionRightPos: right - width,
-				currentSectionWidth: width
+				currentSectionWidth: width,
+				currentAnchor: anchor
 			})
 		}
 		else {
 			this.setState({
 				currentSectionRightPos: -200,
-				currentSectionWidth: 0
+				currentSectionWidth: 0,
+				currentAnchor: null
 			})
 		}
 		
 	}
 	render() {
 		const {scrollManager, sections, displayHeader} = this.props;
-		const {currentSectionRightPos, currentSectionWidth} = this.state;
+		const {currentSectionRightPos, currentSectionWidth, currentAnchor} = this.state;
 		let height = HEIGHT;
 
-		let navItems = sections.map(section => <NavItem href={section.anchor} scrollManager={scrollManager}>{section.title}</NavItem>)
+		let navItems = sections.map(section => 
+			<NavItem href={section.anchor} scrollManager={scrollManager} selected={currentAnchor === section.anchor}>
+				{section.title}
+			</NavItem>
+		)
 
 		return (
 			<NavContainer>
@@ -152,7 +159,6 @@ export default class NavBar extends Component {
 				<Nav height={height} sticky={this.state.stickyNav} id="main-nav" ref={this.mainNav}>
 					<CurrentItem right={currentSectionRightPos} width={currentSectionWidth} sticky={this.state.stickyHeader}/>
 					<NavItems center={displayHeader}>
-						
 						{navItems}
 					</NavItems>
 				</Nav>

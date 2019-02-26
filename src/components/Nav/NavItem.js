@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import scrollToAnchor from '../../utils/scrollToAnchor'
+import { hexToRGB, TEAL } from '../../utils/colors';
 
 const NavItem_ListItem = styled.li`
 	text-align: center;
-	margin: 10px;
+	margin: 0 5px;
 	font-size: 26px;
 	height: 36px;
 	line-height: 36px;
+	padding: 10px 4px;
 `
 const NavItem_Link = styled.a`
-	color: #DDD;
+	color: ${props => props.selected ? "white" : "#DDD"};
+	transition: all .3s;
 	text-decoration: none;
 	:hover {
 		color: white;
@@ -30,13 +33,13 @@ export default class NavItem extends Component {
 		scrollManager.scrollToAnchor(href);
 	}
 	render() {
-		const {href, children, scrollManager, ...otherProps} = this.props;
+		const {href, children, scrollManager, selected, ...otherProps} = this.props;
 		
 		let navAnchor = href.substring(1) + "Nav";
 
 		return (
 			<NavItem_ListItem {...otherProps}>
-				<NavItem_Link id={navAnchor} onClick={this.onClick} href={href}>{children}</NavItem_Link>
+				<NavItem_Link id={navAnchor} selected={selected} onClick={this.onClick} href={href}>{children}</NavItem_Link>
 			</NavItem_ListItem>
 		)
 	}

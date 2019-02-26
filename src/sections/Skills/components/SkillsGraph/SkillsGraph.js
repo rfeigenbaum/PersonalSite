@@ -65,7 +65,7 @@ export default class SkillsGraph extends Component {
 				baseLeft: this.state.baseLeft
 			}
 			let goal = index*-100;
-			let duration = 450 + Math.pow(Math.abs(selectedIndex-index)*100, 3/4)
+			let duration = 550 + Math.pow(Math.abs(selectedIndex-index)*100, 3/4)
 
 			if(this.animation !== null) {
 				this.animation.pause();
@@ -75,7 +75,7 @@ export default class SkillsGraph extends Component {
 				targets: temp,
 				baseLeft: index*-100,
 				duration: duration,
-				easing: 'easeInOutSine',
+				easing: 'easeInOutQuad',
 				update: () => this.setState({baseLeft: temp.baseLeft}),
 				begin: () => this.setState({selectedIndex: index, moving: true}),
 				complete: () => this.setState({moving: false})
