@@ -61,25 +61,7 @@ export default class SkillsGraph extends Component {
 	setToIndex = (index) => {
 		let {selectedIndex} = this.state;
 		if(selectedIndex !== index) {
-			let temp = {
-				baseLeft: this.state.baseLeft
-			}
-			let goal = index*-100;
-			let duration = 550 + Math.pow(Math.abs(selectedIndex-index)*100, 3/4)
-
-			if(this.animation !== null) {
-				this.animation.pause();
-			}
-
-			this.animation = anime({
-				targets: temp,
-				baseLeft: index*-100,
-				duration: duration,
-				easing: 'easeInOutQuad',
-				update: () => this.setState({baseLeft: temp.baseLeft}),
-				begin: () => this.setState({selectedIndex: index, moving: true}),
-				complete: () => this.setState({moving: false})
-			})
+			this.setState({baseLeft: index*-100, selectedIndex: index});
 		}
 		
 	}

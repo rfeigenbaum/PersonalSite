@@ -177,7 +177,8 @@ export default class MagneticScroll {
 			clearInterval(this.enableScrollTimeout);
 			this.enableScrollTimeout = null;
 		}
-		this.enableScrollTimeout = setTimeout(() => this.scrollDisabled = false, 100);
+		this.allowScrollEvent = false
+		this.enableScrollTimeout = setTimeout(() => {this.scrollDisabled = false; this.allowScrollEvent = true}, 100);
 
 		if(this.enableScrollWithinSectionTimeout !== null) {
 			clearInterval(this.enableScrollWithinSectionTimeout);
