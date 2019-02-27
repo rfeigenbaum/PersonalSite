@@ -42,6 +42,7 @@ const NavItems = styled.ul`
 	flex-direction: row;
 	width: auto;
 	justify-content: flex-end;
+	font-family: 'URW-Geometric';
 	@media (max-width: 1100px) {
 		width: 100%;
 		justify-content: space-around;

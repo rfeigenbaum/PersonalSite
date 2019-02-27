@@ -7,10 +7,16 @@ const Container = styled.div`
 `
 
 const Name = styled.h2`
-	font-weight: 600;
+	font-weight: 400;
 	z-index: 10;
 	position: relative;
+	margin-bottom: 5px;
+	font-size: 2.5rem;
 `
+const Developer = styled.h1`
+	margin-top: 5px;
+	font-size: 3rem;
+` 
 const Figtree = styled.h2`
 	font-weight: 400;
 	position: absolute;
@@ -29,7 +35,7 @@ const NameBox = styled.div`
 export default () => (
 	<Container>
 		<Name>Ryan Feigenbaum</Name>
-		<h1>Developer.</h1>
+		<Developer>Developer.</Developer>
 	</Container>
 )
 
