@@ -5,13 +5,25 @@ import Nav from '../components/Nav/Nav'
 const Container = styled.div`
 	text-align: center;
 `
-const NavTrigger = styled.div`
-	position: absolute;
-	bottom: 0;
-`
 
 const Name = styled.h2`
 	font-weight: 600;
+	z-index: 10;
+	position: relative;
+`
+const Figtree = styled.h2`
+	font-weight: 400;
+	position: absolute;
+	color: #CCC;
+	top: ${props => props.hovered ? "-60%" : "-40%"};
+	right: 10%;
+	opacity: ${props => props.hovered ? 1 : 0};
+	z-index: 5;
+	transition: all .3s;
+`
+const NameBox = styled.div`
+	position: relative;
+	display: inline-block;
 `
 
 export default () => (
@@ -20,3 +32,25 @@ export default () => (
 		<h1>Developer.</h1>
 	</Container>
 )
+
+//Figtree version
+/*export default class Home extends Component {
+	constructor() {
+		super();
+		this.state = {
+			hovered: false
+		}
+	}
+	render() {
+		return (
+			<Container>
+				<NameBox>
+					<Figtree hovered={this.state.hovered}>( Figtree )</Figtree>
+					<Name>Ryan <span onMouseEnter={() => this.setState({hovered: true})} onMouseLeave={() => this.setState({hovered: false})}>Feigenbaum</span></Name>
+				</NameBox>
+				<h1>Developer.</h1>
+			</Container>
+		)
+	}
+	
+}*/

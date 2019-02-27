@@ -16,6 +16,7 @@ const BarsGroupContainer = styled.div`
 	padding: 0 20px 0 10px;
     box-sizing: border-box;
 	top: 0;
+	transition: left .6s;
 `
 const SkillSort = (skillA, skillB) => (
 	skillB.rating  === skillA.rating  ? skillA.name.length - skillB.name.length : skillB.rating - skillA.rating

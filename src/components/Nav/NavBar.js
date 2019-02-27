@@ -40,8 +40,13 @@ const NavItems = styled.ul`
 	margin: 0;
 	display: flex;
 	flex-direction: row;
-	width: ${props => props.center ? "auto" : "100%"};
-	justify-content: ${props => props.center ? "flex-end" : "space-around"};
+	width: auto;
+	justify-content: flex-end;
+	@media (max-width: 1100px) {
+		width: 100%;
+		justify-content: space-around;
+	}
+	
 `
 
 const NavHeaderStyled = styled.h2`
@@ -57,7 +62,9 @@ const NavHeaderStyled = styled.h2`
 	cursor: pointer;
 	font-weight: 600;
 	font-size: 36px;
-	display: ${props => props.displayHeader ? 'initial' : 'none'};
+	@media (max-width: 1100px) {
+		display: none;
+	}
 `
 
 const CurrentItem = styled.div`

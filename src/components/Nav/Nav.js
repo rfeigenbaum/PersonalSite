@@ -9,23 +9,23 @@ import { hexToRGB } from '../../utils/colors';
 import $ from 'jquery';
 import NavBar from './NavBar';
 import _ from 'lodash';
-import windowSize from 'react-window-size';
+//import windowSize from 'react-window-size';
 //import NavHeader from './NavHeader';
 
-class Nav extends Component {
+export default class Nav extends Component {
 	constructor() {
 		super();
 	}
 
 	render() {
-		const {windowWidth, windowHeight, ...props} = this.props;
+		const { ...props} = this.props;
 		return (
-			<NavBar displayHeader={windowWidth > 1100} {...props} sections={sections} />
+			<NavBar {...props} sections={sections} />
 		)
 	}
 }
 
-export default windowSize(Nav);
+//export default windowSize(Nav);
 
 var sections = [
 	{

@@ -10,6 +10,7 @@ const NavItem_ListItem = styled.li`
 	height: 36px;
 	line-height: 36px;
 	padding: 10px 4px;
+	transition: all .5s;
 `
 const NavItem_Link = styled.a`
 	color: ${props => props.selected ? "white" : "#DDD"};

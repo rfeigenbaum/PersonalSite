@@ -50,7 +50,7 @@ export default class IndexPage extends Component {
 				<Section colors={ColorPairs.grey} id="experience">
 					<WorkExperience />
 				</Section>
-				<Section colors={ColorPairs.teal} style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}} id="education">
+				<Section colors={ColorPairs.lightGrey}  id="education">
 					<Education />
 				</Section>
 				<Section colors={ColorPairs.grey} id="projects">
@@ -68,3 +68,4 @@ export default class IndexPage extends Component {
 	
 }
 
+//style={{background: `linear-gradient(90deg, ${ColorPairs.teal.main} 50%, ${ColorPairs.teal.secondary} 50%)`}}
