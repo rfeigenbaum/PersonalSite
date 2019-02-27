@@ -36,7 +36,7 @@ const Nav = styled.nav`
 const NavItems = styled.ul`
 	list-style: none;
 	float: right;
-	padding: 0;
+	padding: 0 10px;
 	margin: 0;
 	display: flex;
 	flex-direction: row;
@@ -60,7 +60,7 @@ const NavHeaderStyled = styled.h2`
 	width: 400px;
 	margin: 0;
 	cursor: pointer;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 36px;
 	@media (max-width: 1100px) {
 		display: none;

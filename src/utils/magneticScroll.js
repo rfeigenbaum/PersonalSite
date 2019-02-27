@@ -125,7 +125,7 @@ export default class MagneticScroll {
 					if(this.scrollEventTimer) {
 						clearTimeout(this.scrollEventTimer);
 					}
-					this.scrollEventTimer = setTimeout(() => this.allowScrollEvent = true, 50);
+					this.scrollEventTimer = setTimeout(() => this.allowScrollEvent = true, 100);
 				}
 			}
 			if(!movedWithinSection && this.allowScrollEvent) {
