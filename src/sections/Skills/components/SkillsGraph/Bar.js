@@ -72,7 +72,6 @@ export default class Bar extends Component {
 	componentDidMount() {
 		let barText = this.text.current;
 		if(barText.offsetWidth >= (this.props.height - 20)) {
-			console.log("shit")
 			this.shrinkUntilFits();
 		}
 	}
@@ -83,8 +82,8 @@ export default class Bar extends Component {
 		if(name !== prevProps.name || height !== prevProps.height || width !== prevProps.width) {
 			let barText = this.text.current;
 			barText.style.fontSize = null;
+			this.setState({fontSize: null})
 			if(barText.offsetWidth >= (this.props.height - 20)) {
-				console.log("shit")
 				this.shrinkUntilFits();
 			}
 		}

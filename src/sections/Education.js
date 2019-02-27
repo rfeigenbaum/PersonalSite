@@ -21,17 +21,23 @@ const Conatiner = styled.div`
 	h3, h4, p {
 		margin: 2px 0;
 	}
+	@media screen and (max-width: 850px) {
+		flex-direction: column;
+	}
 `
 
 const School = styled.div`
 	flex-basis: 0;
 	flex-grow: 1;
 	text-align: right;
-	padding: 20px 25px; 
+	padding-right: 20px; 
 	box-sizing: border-box;
 	align-self: center;
 	h4 {
 		font-weight: 500;
+	}
+	@media screen and (max-width: 850px) {
+		text-align: center;
 	}
 `
 
@@ -41,7 +47,7 @@ const RelevantCoursework = styled.div`
 	padding: 40px 25px; 
 	box-sizing: border-box;
 	border: solid 8px ${hexToRGB(TEAL, .4)};
-	box-shadow: 0 0 2px 0px rgba(0,0,0,.3), 0 0 2px 0 rgba(0,0,0,.3) inset;
+	box-shadow: 0 0 2px 0px rgba(0,0,0,.25), 0 0 2px 0 rgba(0,0,0,.25) inset;
 	margin: 20px;
 	position: relative;
 	h3 {
@@ -58,17 +64,23 @@ const RelevantCoursework = styled.div`
 		width: 100%;
 		height: 100%;
 		border: solid 8px ${hexToRGB(TEAL, .4)};
-		box-shadow: 0 0 2px 0px rgba(0,0,0,.2), 0 0 2px 0 rgba(0,0,0,.2) inset;
+		box-shadow: 0 0 2px 0px rgba(0,0,0,.3), 0 0 2px 0 rgba(0,0,0,.3) inset;
 	}
 	:before {
 		content: '';
 		position: absolute;
-		top: -20px;
-		left: -20px;
+		top: -21px;
+		left: -21px;
 		width: 100%;
 		height: 100%;
 		border: solid 8px ${hexToRGB(TEAL, .4)};
 		box-shadow: 0 0 2px 0px rgba(0,0,0,.2), 0 0 2px 0 rgba(0,0,0,.2) inset;
+	}
+	@media screen and (max-width: 850px) {
+		margin: 50px;
+		h2 {
+			text-align: center;
+		}
 	}
 `
 
@@ -83,7 +95,7 @@ const Education = ({data, ...props}) => {
 					<h1>Education</h1>
 				
 					
-					<h2>Texas A&M University</h2>
+					<h3>Texas A&M University</h3>
 					<h4>College of Engineering</h4>
 					<h4>Computer Science</h4>
 					<h4>Graduation Date: December 2019</h4>

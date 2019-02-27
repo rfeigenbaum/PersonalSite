@@ -55,13 +55,13 @@ const NavHeaderStyled = styled.h2`
 	top: ${props => props.sticky ? 0 : "calc(100vh - 1px)"};
 	left: 0;
 	z-index: 9999;
-	padding: 4px;
+	padding: 10px;
 	text-align: left;
 	width: 400px;
 	margin: 0;
 	cursor: pointer;
 	font-weight: 500;
-	font-size: 36px;
+	font-size: 38px;
 	@media (max-width: 1100px) {
 		display: none;
 	}

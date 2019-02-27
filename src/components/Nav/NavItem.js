@@ -9,7 +9,7 @@ const NavItem_ListItem = styled.li`
 	font-size: 26px;
 	height: 36px;
 	line-height: 36px;
-	padding: 10px 4px;
+	padding: 14px 4px 6px 4px;
 	transition: all .5s;
 `
 const NavItem_Link = styled.a`
