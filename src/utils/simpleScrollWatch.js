@@ -1,10 +1,10 @@
-import $ from 'jquery'
 import getScrollOffsets from './scrollOffset';
+import getPosition from './offsetTop';
 
 export default class SimpleScrollWatch {
 	//anchorPoint = 0-1 top-bottom of anchor element
 	constructor(anchor, anchorPoint, anchorOffset, callback) {
-		this.anchor = anchor;
+		this.anchor = anchor.charAt(0) === '#' ? anchor.substring(1) : anchor;
 		this.anchorPoint = anchorPoint;
 		this.anchorOffset = anchorOffset;
 		this.callback = callback;
@@ -28,8 +28,10 @@ export default class SimpleScrollWatch {
 
 	updateTargetPosition = () => {
 		let {anchor, anchorPoint, anchorOffset} = this;
-		let anchorDistanceFromTop = $(anchor).offset().top;
-		let distanceFromTopOfAnchor = $(anchor).height() * anchorPoint;
+		let elem = document.getElementById(anchor)
+
+		let anchorDistanceFromTop = getPosition(elem).y;
+		let distanceFromTopOfAnchor = elem.offsetHeight * anchorPoint;
 
 		let aOffset = typeof anchorOffset === "function" ? anchorOffset() : anchorOffset;
 		

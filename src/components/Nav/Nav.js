@@ -6,9 +6,7 @@ import NavItem from './NavItem'
 import scrollToAnchor from '../../utils/scrollToAnchor'
 import SimpleScrollWatch from '../../utils/simpleScrollWatch';
 import { hexToRGB } from '../../utils/colors';
-import $ from 'jquery';
 import NavBar from './NavBar';
-import _ from 'lodash';
 //import windowSize from 'react-window-size';
 //import NavHeader from './NavHeader';
 

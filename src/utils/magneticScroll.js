@@ -1,7 +1,8 @@
-import $ from 'jquery';
 import getScrollOffset from './scrollOffset';
 import ScrollToAnchor from './scrollToAnchor';
 import Debounce from './debounce'
+import ready from './ready';
+import getPosition from './offsetTop';
 
 const VelocityRequired = 10
 const DebouncePeriod = 100;
@@ -20,11 +21,11 @@ export default class MagneticScroll {
 		this.debounce = new Debounce(this.getVelocity, this.scrolled, DebouncePeriod);
 
 		this.listeners = [];
-
-		$(window).on('mousewheel DOMMouseScroll', this.mouseScrollEvent);
-		$(window).on('touchmove', (event) => console.log(event))
 		
-		$(document).ready(this.resetPosition)
+		ready(this.resetPosition)
+
+		window.addEventListener('mousewheel', this.mouseScrollEvent);
+		window.addEventListener('DOMMouseScroll', this.mouseScrollEvent)
 
 		window.addEventListener('resize', () => {
 			clearTimeout(this.resizeId);
@@ -89,10 +90,10 @@ export default class MagneticScroll {
 		this.scrollToIndex(currentElemIndex);
 	}
 
-	getVelocity = (jEvent) => jEvent.originalEvent.deltaY;
+	getVelocity = (event) => event.deltaY;
 
 	withinElement = (elem, scrollPosition, velocity) => {
-		let topOfElem = $(elem).offset().top;
+		let topOfElem = getPosition(elem).y
 		let windowHeight = this.getWindowHeight();
 		//Scrolling Up
 		if(velocity < 0) {
@@ -110,6 +111,7 @@ export default class MagneticScroll {
 	}
 
 	mouseScrollEvent = (event) => {
+		event.preventDefault();
 		let velocity = this.getVelocity(event);
 		let currentPosition = getScrollOffset().y;
 		let currentElem = this.elems[this.getCurrentElemIndex(currentPosition)];
@@ -213,7 +215,7 @@ export default class MagneticScroll {
 		let _percentHeightOfScreen = percentHeightOfScreen || .5;
 		let middleOfScreen = scrollPosition + this.getWindowHeight() * _percentHeightOfScreen;
 		let index = this.elems.findIndex((elem) => {
-			let distanceFromTop = $(elem).offset().top
+			let distanceFromTop = getPosition(elem).y;
 			return distanceFromTop < middleOfScreen && (distanceFromTop + elem.offsetHeight) > middleOfScreen;
 		})
 		return index;

@@ -6,7 +6,6 @@ import NavItem from './NavItem'
 import scrollToAnchor from '../../utils/scrollToAnchor'
 import SimpleScrollWatch from '../../utils/simpleScrollWatch';
 import { hexToRGB } from '../../utils/colors';
-import $ from 'jquery';
 
 const HEIGHT = "56px";
 
