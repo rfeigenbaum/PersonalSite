@@ -40,6 +40,7 @@ export default class IndexPage extends Component {
 		const {scrollManager} = this.state;
 		return (
 			<Layout>
+				<SEO title={"Home"} />
 				<Nav scrollManager={scrollManager} />
 				<Section colors={ColorPairs.darkGrey} id="home">
 					<Home />
