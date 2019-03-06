@@ -8,7 +8,7 @@ import { hexToRGB, TEAL } from '../utils/colors';
 
 const Conatiner = styled.div`
 	max-width: 1400px;
-	padding-top: 50px;
+	padding: 8% 50px;
 	margin: 0 auto;
 	display: flex;
 	align-content: center;
@@ -49,6 +49,7 @@ const RelevantCoursework = styled.div`
 	border: solid 8px ${hexToRGB(TEAL, .4)};
 	box-shadow: 0 0 2px 0px rgba(0,0,0,.25), 0 0 2px 0 rgba(0,0,0,.25) inset;
 	margin: 20px;
+	margin-right: 40px;
 	position: relative;
 	h3 {
 		margin-top: 5px;

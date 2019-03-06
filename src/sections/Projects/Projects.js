@@ -6,7 +6,7 @@ import ProjectHoverable from './components/ProjectHoverable'
 const Conatiner = styled.div`
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 50px 10px 0 10px;
+	padding: 50px 10px;
 	width: 100%;
 	box-sizing: border-box;
 `

@@ -11,7 +11,7 @@ const HEIGHT = "56px";
 
 const NavContainer = styled.div`
 `
-
+//TODO: Experiment with bottom box shadow
 const Nav = styled.nav`
 	width: 100vw;
 	z-index: 9000;
@@ -41,7 +41,6 @@ const NavItems = styled.ul`
 	flex-direction: row;
 	width: auto;
 	justify-content: flex-end;
-	font-family: 'URW-Geometric';
 	@media (max-width: 1100px) {
 		width: 100%;
 		justify-content: space-around;
@@ -60,8 +59,9 @@ const NavHeaderStyled = styled.h2`
 	width: 400px;
 	margin: 0;
 	cursor: pointer;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 38px;
+	letter-spacing: 1px;
 	@media (max-width: 1100px) {
 		display: none;
 	}

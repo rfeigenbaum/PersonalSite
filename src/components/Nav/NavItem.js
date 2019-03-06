@@ -6,10 +6,10 @@ import { hexToRGB, TEAL } from '../../utils/colors';
 const NavItem_ListItem = styled.li`
 	text-align: center;
 	margin: 0 5px;
-	font-size: 26px;
+	font-size: 24px;
 	height: 36px;
 	line-height: 36px;
-	padding: 14px 4px 6px 4px;
+	padding: 10px 4px 10px 4px;
 	transition: all .5s;
 `
 const NavItem_Link = styled.a`

@@ -20,11 +20,15 @@ const Title = styled.h2`
 	font-weight: 700;
 	color: ${hexToRGB(TEAL, .5)};
 	margin-left: 5px;
+	margin-top: 4px;
+	margin-bottom: -6px;
 `
 const Description = styled.h2`
 	${HeadingBase}
 	color: ${hexToRGB(TEAL, .4)};
 	margin-left: 5px;
+	margin-top: 6px;
+	margin-bottom: -4px;
 `
 const Line = styled.hr`
 	display: block;

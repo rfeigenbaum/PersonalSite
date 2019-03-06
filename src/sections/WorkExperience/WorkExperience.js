@@ -4,8 +4,9 @@ import { StaticQuery, graphql } from "gatsby"
 import ExperienceItem from './components/ExperienceItem';
 
 const Conatiner = styled.div`
-	max-width: 1400px;
-	margin: 50px auto 0;
+	max-width: 1500px;
+	margin: 0 auto;
+	padding: 5% 50px;
 `
 
 

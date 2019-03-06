@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const Conatiner = styled.div`
 	max-width: 1200px;
 	margin: 0 auto;
+	padding: 10% 0;
 `
 
 let Text = styled.h2`
