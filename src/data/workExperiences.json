@@ -1,8 +1,7 @@
 [
 	{
 		"company": "HKS Architects Inc.",
-		"role": "Web App Developer",
-		"position": "Intern",
+		"title": "Intern",
 		"timespans": ["August 2018 - Present", "May 2017 - April 2018"],
 		"url": "google.com",
 		"location": "Dallas, TX",
@@ -10,8 +9,7 @@
 	},
 	{
 		"company": "Charles Schwab Co.",
-		"role": "Web Developer",
-		"position": "Intern",
+		"title": "Intern",
 		"timespans": ["May 2018 - August 2018"],
 		"url": "google.com",
 		"location": "Austin, TX",
@@ -19,7 +17,7 @@
 	},
 	{
 		"company": "Eager Web Services, LLC",
-		"role": "Contract Web Developer",
+		"title": "Contract Web Developer",
 		"timespans": ["July 2015 - August 2015"],
 		"url": "google.com",
 		"location": "San Antonio, TX",

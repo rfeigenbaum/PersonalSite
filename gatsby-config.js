@@ -5,7 +5,9 @@ module.exports = {
 		author: `Ryan Feigenbaum`,
 	},
 	plugins: [
+		`gatsby-plugin-typescript`,
 		`gatsby-plugin-offline`,
+		`gatsby-plugin-sass`,
 		`gatsby-plugin-less`,
 		{
 			resolve: 'gatsby-plugin-root-import',
@@ -46,19 +48,18 @@ module.exports = {
 		},
 		`gatsby-transformer-remark`,
 		`gatsby-transformer-sharp`,
-		`gatsby-plugin-sharp`,
 		{
-			resolve: `gatsby-plugin-manifest`,
+			resolve: 'gatsby-plugin-root-import',
 			options: {
-				name: `gatsby-starter-default`,
-				short_name: `starter`,
-				start_url: `/`,
-				background_color: `#663399`,
-				theme_color: `#663399`,
-				display: `minimal-ui`,
-				icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-			},
-		},
+				src: `${__dirname}/src`,
+				components: `${__dirname}/src/components`,
+				sections: `${__dirname}/src/sections`,
+				utils: `${__dirname}/src/utils`
+				//src: path.join(__dirname, 'src'),
+				//components: path.join(__dirname, 'src/components'),
+				//sections: path.join(__dirname, 'src/sections')
+			}
+		}
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
