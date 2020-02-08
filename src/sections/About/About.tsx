@@ -15,13 +15,13 @@ const sectionColors:SectionColors = {
 
 const About:React.SFC<{}> = () => (
     <Section sectionColors={sectionColors} id="about">
-        <styles.Conatiner>
+        <styles.Container>
             <h1>Feigenbaum <styles.Pronunciation>{BulletCode} {PronunciationText}</styles.Pronunciation></h1>
             <styles.Definitions>
                 <li>a German surname meaning "fig tree"</li>
                 <li>an exceptionally creative and dependable developer with a focus in web application development</li>
             </styles.Definitions>
-        </styles.Conatiner>
+        </styles.Container>
     </Section>
 )
 

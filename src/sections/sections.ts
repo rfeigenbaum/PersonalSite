@@ -1,6 +1,7 @@
 import About from "./About";
 import WorkExperience from "./WorkExperience";
 import Skills from "./Skills"
+import Contact from "./Contact";
 
 export interface Section {
     SectionElement: React.ReactType
@@ -23,6 +24,11 @@ export const sections:Section[] = [
         SectionElement: Skills,
         displayText: "Skills",
         anchor: "skills"
+    },
+    {
+        SectionElement: Contact,
+        displayText: "Contact",
+        anchor: "contact"
     }
 ]
 

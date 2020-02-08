@@ -99,5 +99,5 @@ export const CurrentItem = styled.div<CurrentLinkProperties>`
 	top: 0;
 	z-index: 9001;
 	right: ${props => (props.rightPos - 7) + "px"};
-	transition: width .2s, right .5s;
+	transition: width .3s cubic-bezier(0.1, 0, 1, 1), right .5s;
 `
