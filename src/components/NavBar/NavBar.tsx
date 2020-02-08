@@ -32,7 +32,7 @@ const NavBar:React.FC<{}> = () => {
         setPastHomeSection(triggered);
         return !triggered;
     }) 
-    const [currentAnchor, setCurrentAnchor] = useSectionScrollWatcher()
+    const [currentAnchor, setCurrentAnchor] = useSectionScrollWatcher(getNavAnchorOffset)
     const scrollToTop = (e: React.MouseEvent) => {
 		e.preventDefault();
         scrollToAnchor('#home');
@@ -57,7 +57,7 @@ const NavBar:React.FC<{}> = () => {
 		else {
             setCurrentLinkSettings({
                 rightPos: -200,
-                width: 100
+                width: currentLinkSettings.width
             })
 		}
     }, [currentAnchor])

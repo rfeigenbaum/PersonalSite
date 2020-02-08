@@ -10,41 +10,44 @@ interface Section {
     anchor: string
 }
 
-export const useSectionScrollWatcher = ():[string, React.Dispatch<React.SetStateAction<string>>] => {
+export const useSectionScrollWatcher = (navOffset: Function):[string, React.Dispatch<React.SetStateAction<string>>] => {
     const [isInitialized, setIsInitialized] = useState<boolean>(false);
     const [currentAnchor, setCurrentAnchor] = useState<string>("home");
 
     const sections = useRef<Section[] | null>(null);
 
-    useEffect(() => {
-        if(isInitialized === false){
-            sections.current = getSections()
-            onScroll();
-            //console.log("setting sections")
-        }
-    }, [isInitialized])
-
     const onScroll = (event?: Event) => {
         let scrollPos = getScrollOffset().y
-        let currentSectionPositions = sections.current as Section[]
+        let currentSectionPositions = sections.current
 
-        let currentSectionIndex = currentSectionPositions.findIndex((section) => section.top <= scrollPos);
-        if(currentSectionIndex >= 0) {
-            setCurrentAnchor(currentSectionPositions[currentSectionIndex].anchor);
-            //console.log(currentSectionPositions[currentSectionIndex].anchor)
+        if(currentSectionPositions && currentSectionPositions.length > 0){
+            let currentSectionIndex = currentSectionPositions.findIndex((section) => section.top + navOffset() <= scrollPos);
+            if(currentSectionIndex >= 0) {
+                if(currentSectionPositions[currentSectionIndex].anchor === "about") {
+                    currentSectionIndex = currentSectionPositions.findIndex((section) => section.top <= scrollPos);
+                }
+                setCurrentAnchor(currentSectionPositions[currentSectionIndex].anchor);
+                //console.log(currentSectionPositions[currentSectionIndex].anchor)
+            }
         }
-
     }
-
-    window.addEventListener('mousewheel', throttle(onScroll, 10));
-    window.addEventListener('DOMMouseScroll', throttle(onScroll, 10));
 
     let resizeFunction = debounce(function() {
         sections.current = getSections()
         console.log("resetting sections")
     }, 250)
 
-    window.addEventListener('resize', resizeFunction);
+    
+
+    useEffect(() => {
+        if(isInitialized === false){
+            sections.current = getSections();
+            window.addEventListener('mousewheel', throttle(onScroll, 50));
+            window.addEventListener('DOMMouseScroll', throttle(onScroll, 50));
+            window.addEventListener('resize', resizeFunction);
+            onScroll();
+        }
+    }, [isInitialized])
 
     return [currentAnchor, setCurrentAnchor];
 }

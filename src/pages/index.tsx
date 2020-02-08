@@ -6,14 +6,16 @@ import About from '@sections/About'
 import WorkExperience from '@sections/WorkExperience'
 import NavBar from '@components/NavBar'
 
+import sections from '@sections/sections'
 
 const Index:React.FC<{}> = () => {
     return (
         <Layout>
             <NavBar/>
             <Home/>
-            <About/>
-            <WorkExperience />
+            {
+                sections.map(s => <s.SectionElement />)
+            }
         </Layout>
     )
 }
