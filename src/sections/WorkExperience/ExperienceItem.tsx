@@ -5,7 +5,8 @@ import { WorkExperienceItem } from './models';
 
 const Experience = styled.div`
 	display: flex;
-	margin: 50px 0;
+    margin: 50px 0;
+    align-items: center;
 `
 const Info = styled.div`
 	border-right: solid thin ${props => props.theme.secondary};
@@ -20,7 +21,8 @@ const Details = styled.div`
 	padding-left: 10px;
 `
 const DetailsParagraph = styled.p`
-	font-size: 22px;
+    font-size: 1.4em;
+    margin: 0;
 `
 
 interface Props {
