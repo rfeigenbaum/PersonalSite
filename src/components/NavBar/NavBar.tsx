@@ -13,6 +13,8 @@ import {scrollToAnchor} from '@utils/scrollHelpers'
 import {useScrollWatcher, AnchorPoint} from '@utils/simpleScrollWatch'
 import {useSectionScrollWatcher} from '@utils/sectionScrollWatcher'
 import sections from '@sections/sections'
+import useEventListener from '@utils/useEventListener'
+import debounce from '@utils/debounce'
 
 const NavBar:React.FC<{}> = () => {
     const navRef = useRef<HTMLDivElement>(null);
@@ -38,13 +40,11 @@ const NavBar:React.FC<{}> = () => {
         scrollToAnchor('#home');
         setCurrentAnchor('home')
     }
-    useEffect(() => {
-        console.log(currentAnchor);
+
+    const moveBoxToCurrentLink = () => {
         let navLinks:HTMLCollection = (navRef.current as HTMLDivElement).getElementsByClassName('nav_link');
-        console.log(Array.from(navLinks).forEach(item => console.log((item as HTMLLinkElement))))
         let currentLink:HTMLLinkElement = Array.from(navLinks).find((elem) =>  (elem as HTMLAnchorElement).hash === ("#" + currentAnchor)) as HTMLLinkElement;
         if(currentLink) {
-            
 			let left = currentLink.offsetLeft;
 			let right = (navRef.current as HTMLDivElement).offsetWidth - left;
 			let width = currentLink.offsetWidth;
@@ -60,6 +60,10 @@ const NavBar:React.FC<{}> = () => {
                 width: currentLinkSettings.width
             })
 		}
+    }
+    useEventListener('resize', debounce(moveBoxToCurrentLink, 250))
+    useEffect(() => {
+        moveBoxToCurrentLink();
     }, [currentAnchor])
     return (
         <>

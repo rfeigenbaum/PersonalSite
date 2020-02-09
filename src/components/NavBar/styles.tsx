@@ -35,6 +35,7 @@ export const NavItems = styled.ul`
 	flex-direction: row;
 	width: auto;
 	justify-content: flex-end;
+	box-sizing: border-box;
 	
 	@media (max-width: 1100px) {
 		width: 100%;

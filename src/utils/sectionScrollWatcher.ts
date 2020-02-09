@@ -34,7 +34,7 @@ export const useSectionScrollWatcher = (navOffset: Function):[string, React.Disp
 
     let resizeFunction = debounce(function() {
         sections.current = getSections()
-        console.log("resetting sections")
+        onScroll();
     }, 250)
 
     
