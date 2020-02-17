@@ -1,16 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { WorkExperienceItem } from './models';
-
-const CompanyName = styled.h3`
-	margin: 4px 0;
-`
-const Position = styled.h4`
-	margin: 4px 0;
-`
-const TimeSpan = styled.h5`
-	margin: 2px 0;
-`
+import {
+	CompanyName,
+	Position,
+	TimeSpan
+} from './styles'
 
 interface ExperienceInfoProps {
     experienceInfo: WorkExperienceItem
