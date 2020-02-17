@@ -30,7 +30,7 @@ export const SkillLine = styled.div`
     justify-content: space-between;
     margin: 1px 0;
     padding: 1px;
-    align-items: end;
+    align-items: center;
     flex-basis: 400px;
     flex-shrink: 1;
     flex-grow: 1;
@@ -46,6 +46,7 @@ export const SkillName = styled.h3`
 
 export const Stars = styled.div`
     line-height: 0;
+    margin-top: -6px;
 `
 
 export const StarStyled = styled(Star)`
