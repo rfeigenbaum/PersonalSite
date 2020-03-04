@@ -3,7 +3,8 @@ import {useState, useRef, useEffect} from 'react'
 import {getElementPosY, getScrollOffset} from './scrollHelpers'
 
 import debounce from './debounce'
-import throttle from './throttle'
+//import throttle from './throttle'
+import throttle from 'lodash.throttle'
 
 interface Section {
     top: number
@@ -42,8 +43,7 @@ export const useSectionScrollWatcher = (navOffset: Function):[string, React.Disp
     useEffect(() => {
         if(isInitialized === false){
             sections.current = getSections();
-            window.addEventListener('mousewheel', throttle(onScroll, 50));
-            window.addEventListener('DOMMouseScroll', throttle(onScroll, 50));
+            window.addEventListener('scroll', throttle(onScroll, 10));
             window.addEventListener('resize', resizeFunction);
             onScroll();
         }

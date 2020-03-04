@@ -48,7 +48,6 @@ const NavBar:React.FC<{}> = () => {
 			let left = currentLink.offsetLeft;
 			let right = (navRef.current as HTMLDivElement).offsetWidth - left;
 			let width = currentLink.offsetWidth;
-			console.log(left, right)
             setCurrentLinkSettings({
                 rightPos: right - width,
                 width: width

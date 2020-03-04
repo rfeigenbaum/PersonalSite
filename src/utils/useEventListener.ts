@@ -1,7 +1,10 @@
 import {useRef, useEffect} from 'react'
 
 //Credit: https://github.com/donavon/use-event-listener
-export default function useEventListener(eventName:string, handler:Function, element:Window){
+export default function useEventListener(eventName:string, handler:Function, element?:Window){
+    if(typeof window !== 'undefined' && element !== null) {
+		element = window
+	}
     // Create a ref that stores handler
     const savedHandler = useRef<Function | null>(null);
     
@@ -23,12 +26,14 @@ export default function useEventListener(eventName:string, handler:Function, ele
         // Create event listener that calls handler function stored in ref
         const eventListener = (event:any) => (savedHandler.current as Function)(event);
         
-        // Add event listener
-        element.addEventListener(eventName, eventListener);
+		// Add event listener
+		if(element) 
+        	element.addEventListener(eventName, eventListener);
         
         // Remove event listener on cleanup
         return () => {
-          element.removeEventListener(eventName, eventListener);
+			if (element)
+          		element.removeEventListener(eventName, eventListener);
         };
 
       },
