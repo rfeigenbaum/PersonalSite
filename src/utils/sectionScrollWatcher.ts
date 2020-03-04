@@ -44,8 +44,10 @@ export const useSectionScrollWatcher = (navOffset: Function):[string, React.Disp
         if(isInitialized === false){
             sections.current = getSections();
             window.addEventListener('scroll', throttle(onScroll, 10));
+            window.addEventListener('scroll', throttle(() => sections.current = getSections(), 100))
             window.addEventListener('resize', resizeFunction);
             onScroll();
+            setIsInitialized(true)
         }
     }, [isInitialized])
 

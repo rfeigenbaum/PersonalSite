@@ -1,7 +1,7 @@
 import anime from 'animejs';
 
 //https://www.dyn-web.com/javascript/scroll-distance/
-export const getScrollOffset = ():{x: Number, y:Number} => {
+export const getScrollOffset = ():{x: number, y:number} => {
     var doc = document, w = window;
     var x, y, docEl;
     
@@ -28,7 +28,7 @@ export const getElementPosY = (elem: string | HTMLElement):number | null => {
     }
 	if(element) {
 		var rect = element.getBoundingClientRect();
-		var scrollTop = window.pageYOffset || (document.documentElement || <HTMLElement>document.body.parentNode || document.body).scrollTop
+		var scrollTop = getScrollOffset().y
 		
 		return rect.top + scrollTop;
 	}

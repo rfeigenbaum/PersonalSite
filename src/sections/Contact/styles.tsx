@@ -18,7 +18,8 @@ export const Title = styled.h1`
 
 export const LinksContainer = styled.div`
 	display: flex;
-	align-items: flex-start
+	align-items: flex-start;
+	flex-direction: column;
 `
 
 export const ContactLink = styled.a`
