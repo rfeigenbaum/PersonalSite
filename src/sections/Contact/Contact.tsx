@@ -8,7 +8,8 @@ import LinkedInIcon from '@components/LinkedInIcon'
 import {
     Container,
     ContactLink,
-    Title
+    Title,
+    LinksContainer
 } from './styles'
 
 const sectionColors:SectionColors = {
@@ -20,12 +21,14 @@ const Contact:React.SFC<{}> = () => (
     <Section sectionColors={sectionColors} id="contact" style={{minHeight: '100vh', height: '100%'}}> 
         <Container>
             <Title>Contact</Title>
-            <ContactLink href="mailto:feigenbaum.ryanj@gmail.com">
-                <EmailIcon /> feigenbaum.ryanj@gmail.com
-            </ContactLink>
-            <ContactLink href="https://linkedin.com/in/ryan-feigenbaum/">
-                <LinkedInIcon /> https://linkedin.com/in/ryan-feigenbaum/
-            </ContactLink>
+            <LinksContainer>
+                <ContactLink href="mailto:feigenbaum.ryanj@gmail.com">
+                    <EmailIcon /> feigenbaum.ryanj@gmail.com
+                </ContactLink>
+                <ContactLink href="https://linkedin.com/in/ryan-feigenbaum/">
+                    <LinkedInIcon /> https://linkedin.com/in/ryan-feigenbaum/
+                </ContactLink>
+            </LinksContainer>
         </Container>
     </Section>
 )

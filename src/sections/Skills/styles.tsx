@@ -5,6 +5,7 @@ import Star from '@components/Star'
 export const Container = styled.div`
     margin: 0 auto;
 	padding: 5% 50px;
+    padding-bottom: 70px;
 `
 
 export const SectionTitle = styled.h1`

@@ -8,6 +8,7 @@
 		"@fullpage/react-fullpage": "^0.1.17",
 		"@types/animejs": "^3.1.0",
 		"@types/color": "^3.0.1",
+		"@types/react-helmet": "^5.0.15",
 		"@types/styled-components": "^4.4.2",
 		"animejs": "^3.1.0",
 		"babel-plugin-styled-components": "^1.10.7",

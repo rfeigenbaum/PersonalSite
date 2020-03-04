@@ -14,7 +14,8 @@
         "paths": {
             "@components/*": ["components/*"],
             "@utils/*": ["utils/*"],
-            "@sections/*": ["sections/*"]
+            "@sections/*": ["sections/*"],
+            "@fonts/*": ["fonts/*"]
         },
         "strictPropertyInitialization": false
     }
